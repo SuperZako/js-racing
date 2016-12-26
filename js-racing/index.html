@@ -1,0 +1,550 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>JS Racing ver1.2</title>
+    <meta property="og:title" content="JS Racing">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://js-racing.knockknock.jp/">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:image" content="http://js-racing.knockknock.jp/fb.jpg">
+    <meta property="og:site_name" content="JS Racing ver1.2">
+    <meta property="og:description" content="This content is an online car racing game. I'm using WebSocket and WebGL. Game it is possible to operate the car using the smartphone. Please enjoy Come on.">
+    <link href="http://fonts.googleapis.com/css?family=Racing+Sans+One" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lora" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <div id="fb-root"></div>
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id))
+                return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&appId=170385386456940&version=v2.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        } (document, 'script', 'facebook-jssdk'));
+    </script>
+    <!-- #preloader-->
+    <div id="preloader" style="display: none;" class="preloader">
+        <p id="preloaderTxt" class="preloader__txt">
+            JS Racing ver1.2 Loading... (<span id="preloaderLoaded">0</span>/<span id="preloaderTotal">0</span>)
+        </p>
+    </div>
+    <!-- #main-->
+    <div id="main" style="display: none;" class="main">
+        <!-- #view3d-->
+        <div id="view3d" style="display: none;" class="view3d"></div>
+        <!-- #physics-->
+        <canvas id="physics" width="800" height="800" style="display: none;" class="physics"></canvas>
+        <!-- #scene-->
+        <div id="scene" class="scene">
+            <!-- #sceneOpening-->
+            <section id="sceneOpening" style="display: none;" class="scene-opening">
+                <div class="scene-opening__inner">
+                    <div class="scene-opening__box5">
+                        <h1 class="scene-opening__ttl">
+                            <span class="scene-opening__ttl__txt">
+                                JS Racing<br>
+                            </span><span class="scene-opening__ttl__txt2">&nbsp;ver1.2</span>
+                        </h1>
+                    </div>
+                    <div class="scene-opening__box">
+                        <div class="scene-opening__box-left">
+                            <div class="scene-opening__box2">
+                                <h2 class="scene-opening__ttl2">
+                                    Operation
+                                </h2>
+                                <div class="scene-opening__box2-left">
+                                    <h3 class="scene-opening__ttl3">
+                                        Smartphone
+                                    </h3>
+                                    <div class="scene-opening__box3">
+                                        <img id="sceneOpeningImg" widht="100" height="100">
+                                    </div>
+                                    <div id="sceneOpeningTxt" class="scene-opening__txt">
+                                        &nbsp;
+                                    </div>
+                                </div>
+                                <div class="scene-opening__box2-right">
+                                    <h3 class="scene-opening__ttl3">
+                                        Desktop
+                                    </h3>
+                                    <div class="scene-opening__box6">
+                                        <div class="scene-opening__key">
+                                            ▲W
+                                        </div>
+                                    </div>
+                                    <div class="scene-opening__box6">
+                                        <div class="scene-opening__key">
+                                            ◀A
+                                        </div>
+                                        <div class="scene-opening__key">
+                                            ▼S
+                                        </div>
+                                        <div class="scene-opening__key">
+                                            ▶︎D
+                                        </div>
+                                    </div>
+                                    <div class="scene-opening__box6">
+                                        <div class="scene-opening__key2">
+                                            SPACE
+                                        </div>
+                                    </div>
+                                    <ul class="scene-opening__list-key">
+                                        <li>▲/W : Forward</li>
+                                        <li>▼/S : Back</li>
+                                        <li>◀︎/A : Left</li>
+                                        <li>▶︎/D : Right</li>
+                                        <li>SPACE : CameraAngle</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="scene-opening__box-right">
+                            <div class="scene-opening__box2">
+                                <h2 class="scene-opening__ttl2">
+                                    Color
+                                </h2>
+                                <div class="scene-opening__box4">
+                                    <div class="scene-opening__box4-left">
+                                        <h3 class="scene-opening__ttl3 mb5 tal">
+                                            Body
+                                        </h3>
+                                    </div>
+                                    <div class="scene-opening__box4-right">
+                                        <ul class="scene-opening__list-color">
+                                            <li>
+                                                <a href="#" data-color="#111111" class="sceneOpeningBtnBodyColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#555555" class="sceneOpeningBtnBodyColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#ffffff" class="sceneOpeningBtnBodyColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#ff6699" class="sceneOpeningBtnBodyColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#cc0000" class="sceneOpeningBtnBodyColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#660066" class="sceneOpeningBtnBodyColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#3366cc" class="sceneOpeningBtnBodyColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#009999" class="sceneOpeningBtnBodyColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#0099ff" class="sceneOpeningBtnBodyColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#336600" class="sceneOpeningBtnBodyColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#cc9900" class="sceneOpeningBtnBodyColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#ff6600" class="sceneOpeningBtnBodyColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="scene-opening__box4">
+                                    <div class="scene-opening__box4-left">
+                                        <h3 class="scene-opening__ttl3 mb5 tal">
+                                            Wing
+                                        </h3>
+                                    </div>
+                                    <div class="scene-opening__box4-right">
+                                        <ul class="scene-opening__list-color">
+                                            <li>
+                                                <a href="#" data-color="#111111" class="sceneOpeningBtnWingColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#555555" class="sceneOpeningBtnWingColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#ffffff" class="sceneOpeningBtnWingColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#ff6699" class="sceneOpeningBtnWingColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#cc0000" class="sceneOpeningBtnWingColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#660066" class="sceneOpeningBtnWingColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#3366cc" class="sceneOpeningBtnWingColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#009999" class="sceneOpeningBtnWingColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#0099ff" class="sceneOpeningBtnWingColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#336600" class="sceneOpeningBtnWingColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#cc9900" class="sceneOpeningBtnWingColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#ff6600" class="sceneOpeningBtnWingColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="scene-opening__box4">
+                                    <div class="scene-opening__box4-left">
+                                        <h3 class="scene-opening__ttl3 mb5 tal">
+                                            Driver
+                                        </h3>
+                                    </div>
+                                    <div class="scene-opening__box4-right">
+                                        <ul class="scene-opening__list-color">
+                                            <li>
+                                                <a href="#" data-color="#111111" class="sceneOpeningBtnDriverColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#555555" class="sceneOpeningBtnDriverColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#ffffff" class="sceneOpeningBtnDriverColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#ff6699" class="sceneOpeningBtnDriverColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#cc0000" class="sceneOpeningBtnDriverColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#660066" class="sceneOpeningBtnDriverColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#3366cc" class="sceneOpeningBtnDriverColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#009999" class="sceneOpeningBtnDriverColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#0099ff" class="sceneOpeningBtnDriverColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#336600" class="sceneOpeningBtnDriverColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#cc9900" class="sceneOpeningBtnDriverColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-color="#ff6600" class="sceneOpeningBtnDriverColor scene-opening__btn-color">✔</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="scene-opening__box2">
+                                <h2 class="scene-opening__ttl2">
+                                    Name
+                                </h2>
+                                <div class="scene-opening__box2__inner">
+                                    <input id="sceneOpeningName" type="text" maxlength="15" class="scene-opening__input-text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="scene-opening__list">
+                        <li class="scene-opening__list__item">
+                            <a id="sceneOpeningBtnTimeAtack" href="#sceneTimeAtack" class="scene-opening__btn-time-atack">PLAY</a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <!-- #sceneTimeAtack-->
+            <section id="sceneTimeAtack" style="display: none;" class="scene-time-atack">
+                <h1 class="scene-time-atack__ttl">
+                    <span class="scene-time-atack__ttl__txt">TimeAttack</span>
+                </h1>
+                <!-- #sceneTimeAtackRun-->
+                <section id="sceneTimeAtackRun" style="display: none;" class="run">
+                    <div class="run__inner-lt">
+                        <div id="sceneTimeAtackRunLapTime" class="run__lap-time">
+                            <ul class="run__lap-time__list">
+                                <li class="run__lap-time__list__item run__lap-time__list__item_current run__lap-time__txt4">
+                                    Time :<span id="sceneTimeAtackRunLapTimeCurrent" class="run__lap-time__txt">00:00:0</span>
+                                </li>
+                                <li id="sceneTimeAtackRunLapTimeFastest" style="display: none;" class="run__lap-time__list__item run__lap-time__list__item_fastest">
+                                    <div class="run_lap-time__box">
+                                        <div class="run_lap-time__box-left">
+                                            <a id="sceneTimeAtackRunBtnSave" class="run__btn-save">Save</a>
+                                        </div>
+                                        <div class="run_lap-time__box-right run__lap-time__txt4">
+                                            Fastest Lap :<span id="sceneTimeAtackRunLapTimeFastestTxt" class="run__lap-time__txt2">00:00:0</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul id="sceneTimeAtackRunLapTimeList" class="run__lap-time__list">
+                                <li class="run__lap-time__list__item run__lap-time__list__item_past run__lap-time__txt4">
+                                    Lap<span class="sceneTimeAtackRunLapTimeListLap run__lap-time__txt4">1</span><span class="run__lap-time__txt4">:</span><span class="sceneTimeAtackRunLapTimeListTime run__lap-time__txt3">00:00:0</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="run__inner-lb">
+                        <div id="sceneTimeAtackRunEngineCondition" class="run__engine-condition">
+                            <div class="run__engine-condition__box">
+                                <div class="run__engine-condition__box-left">
+                                    <svg viewBox="0 0 200 200" class="run__engine-condition__mater">
+                                        <path style="opacity: 0.5; fill: #FFFFFF;" d="M100,0C44.772,0,0,44.771,0,100c0,27.614,11.193,52.614,29.289,70.711l35.355-35.355
+                                        C55.596,126.307,50,113.807,50,100c0-27.614,22.386-50,50-50s50,22.386,50,50c0,13.807-5.596,26.307-14.645,35.355l35.355,35.355
+                                        C188.807,152.614,200,127.614,200,100C200,44.771,155.228,0,100,0z" />
+                                        <path style="opacity: 0.5; fill: #FFFFFF;" d="M100,0C44.772,0,0,44.771,0,100c0,6.904,0.7,13.644,2.032,20.154
+                                        c0.5,2.441,1.088,4.85,1.762,7.223c2.471,8.7,6.09,16.918,10.684,24.477c0.835,1.375,1.703,2.727,2.601,4.057
+                                        c1.348,1.995,2.766,3.939,4.25,5.828c2.474,3.148,5.133,6.144,7.961,8.972l7.071-7.071C20.074,147.353,10,124.853,10,100
+                                        c0-49.706,40.294-90,90-90s90,40.294,90,90c0,24.853-10.074,47.353-26.36,63.64l7.071,7.071c2.828-2.828,5.487-5.824,7.961-8.972
+                                        c1.484-1.889,2.902-3.833,4.25-5.828c0.898-1.33,1.766-2.683,2.601-4.057c2.088-3.436,3.975-7.008,5.644-10.7
+                                        c0.668-1.477,1.3-2.972,1.897-4.486c1.194-3.028,2.244-6.128,3.143-9.291c0.674-2.373,1.262-4.782,1.762-7.223
+                                        C199.3,113.644,200,106.904,200,100C200,44.771,155.228,0,100,0z" />
+                                        <rect id="sceneTimeAtackRunEngineConditionMater" x="100" y="100" width="3" height="100" transform="rotate(45 100 100)" fill="#F00"></rect>
+                                    </svg>
+                                </div>
+                                <div class="run__engine-condition__box-right">
+                                    <div class="run__engine-condition__speed">
+                                        <span id="sceneTimeAtackRunEngineConditionSpeedTxt" class="run__engine-condition__txt">0</span><span class="run__engine-condition__txt2">km</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="run__inner-rt">
+                        <a id="sceneTimeAtackRunBtnPause" class="run__btn-pause">Pause</a>
+                        <div id="sceneTimeAtackRunCourseMap" class="run__course-map">
+                            <div class="run__course-map__inner">
+                                <canvas id="sceneTimeAtackRunCourseMapCanvas" height="200" width="200" class="run__course-map__canvas"></canvas>
+                                <div id="sceneTimeAtackRunCourseMapCar" class="run__course-map__car"></div>
+                                <div style="display:none" data-id="" class="sceneTimeAtackRunCourseMapCarOther run__course-map__car__other"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="run__inner-rb">
+                        <div id="sceneTimeAtackRunPlayers" class="run__players">
+                            <ul id="sceneTimeAtackRunPlayersList" class="run__players__list">
+                                <li data-id="">
+                                    <div class="run__players__box">
+                                        <div class="run__players__box-left">
+                                            <svg viewBox="0 0 20 20" class="sceneTimeAtackRunPlayersListColor run__players__color">
+                                                <g id="chassis">
+                                                    <polygon style="fill: #040000;" points="10.828,17.56 10.828,1.247 8.216,1.247 8.216,17.56 7.071,17.56 7.071,19.348
+                                                    11.976,19.348 11.976,17.56 	" />
+                                                    <rect x="5.302" y="4.076" style="fill: #040000;" width="1.65" height="2.122" />
+                                                    <rect x="12.059" y="4.076" style="fill: #040000;" width="1.65" height="2.122" />
+                                                    <rect x="5.211" y="17.261" style="fill: #040000;" width="1.65" height="2.122" />
+                                                    <rect x="12.15" y="17.261" style="fill: #040000;" width="1.65" height="2.122" />
+                                                    <rect x="5.846" y="18.136" style="fill: #040000;" width="7.335" height="0.482" />
+                                                    <rect x="5.846" y="4.89" style="fill: #040000;" width="7.335" height="0.482" />
+                                                </g>
+                                                <g id="wing">
+                                                    <rect x="5.364" y="0.693" style="fill: #CCCCCC;" width="8.284" height="1.864" />
+                                                    <rect x="7.672" y="17.847" style="fill: #CCCCCC;" width="3.64" height="1.498" />
+                                                </g>
+                                                <g id="driver">
+                                                    <ellipse style="fill: #FFFFFF;" cx="9.463" cy="11.981" rx="0.874" ry="0.904" />
+                                                </g>
+                                                <g id="body">
+                                                    <path style="fill: #666666;" d="M10.878,9.089L9.987,0.35H8.997L8.106,9.089L6.478,9.536v4.021l0.911,4.021h4.191l0.911-4.021V9.536
+                                                    L10.878,9.089z M8.36,13.017l0.455-2.369h1.302l0.455,2.369H8.36z" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="run__players__box-right">
+                                            <p class="sceneTimeAtackRunPlayersListName run__players__txt">
+                                                &nbsp;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="run__inner-cm">
+                        <div id="sceneTimeAtackRunMessage" class="run__message">
+                            <p id="sceneTimeAtackRunMessageTxt" class="run__message__txt">
+                                &nbsp;
+                            </p>
+                        </div>
+                    </div>
+                    <div id="sceneTimeAtackRunPauseWindow" style="display:none;" class="run__pause">
+                        <div id="sceneTimeAtackRunPauseWindowInner" class="run__pause__inner">
+                            <a id="sceneTimeAtackRunPauseWindowBtnResume" class="run__btn-resume">Resume</a><a id="sceneTimeAtackRunPauseWindowBtnRetry" class="run__btn-retry">Retry</a>
+                            <div id="sceneTimeAtackRunPauseWindowSave" style="display:none;" class="run__pause__box">
+                                <h3 class="run__pause__ttl">
+                                    SaveFastestLapTime
+                                </h3>
+                                <div id="sceneTimeAtackRunPauseWindowSaveForm" style="display:none;">
+                                    <div class="run__pause__box2">
+                                        <div class="run__pause__box2-left">
+                                            <h4 class="run__pause__ttl2">
+                                                LapTime
+                                            </h4>
+                                        </div>
+                                        <div class="run__pause__box2-right">
+                                            <p id="sceneTimeAtackRunPauseWindowSaveLapTime" class="run__pause__txt">
+                                                00:00:00
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="run__pause__box2">
+                                        <div class="run__pause__box2-left">
+                                            <h4 class="run__pause__ttl2">
+                                                Name
+                                            </h4>
+                                        </div>
+                                        <div class="run__pause__box2-right">
+                                            <input id="sceneTimeAtackRunPauseWindowSaveName" type="text" name="name" maxlength="15" class="run__pause__input-text">
+                                        </div>
+                                    </div>
+                                    <div class="run__pause__box2">
+                                        <div class="run__pause__box2-left">
+                                            <h4 class="run__pause__ttl2">
+                                                Comment
+                                            </h4>
+                                        </div>
+                                        <div class="run__pause__box2-right">
+                                            <textarea id="sceneTimeAtackRunPauseWindowSaveComment" cols="20" rows="3" name="comment" maxlength="40" class="run__pause__textarea"></textarea>
+                                        </div>
+                                    </div>
+                                    <a id="sceneTimeAtackRunPauseWindowSaveBtnSave" class="run__btn-save">Save</a>
+                                </div>
+                                <div id="sceneTimeAtackRunPauseWindowSaveProgress" style="display:none;">
+                                    SendingData...
+                                </div>
+                                <div id="sceneTimeAtackRunPauseWindowSaveComplete" style="display:none;">
+                                    <div class="run__pause__box3">
+                                        <div class="run__pause__box3-left">
+                                            <h4 class="run__pause__ttl2">
+                                                Rank
+                                            </h4>
+                                        </div>
+                                        <div class="run__pause__box3-right">
+                                            <span id="sceneTimeAtackRunPauseWindowSaveCompleteRank" class="run__pause__txt2">0</span>&nbsp; /&nbsp;<span id="sceneTimeAtackRunPauseWindowSaveCompleteLength" class="run__pause__txt">0</span>
+                                        </div>
+                                    </div>
+                                    <div class="run__pause__box3">
+                                        <div class="run__pause__box3-left">
+                                            <h4 class="run__pause__ttl2">
+                                                LapTime
+                                            </h4>
+                                        </div>
+                                        <div class="run__pause__box3-right">
+                                            <p id="sceneTimeAtackRunPauseWindowSaveCompleteLapTime" class="run__pause__txt">
+                                                00:00:00
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="run__pause__box3">
+                                        <div class="run__pause__box3-left">
+                                            <h4 class="run__pause__ttl2">
+                                                Name
+                                            </h4>
+                                        </div>
+                                        <div class="run__pause__box3-right">
+                                            <p id="sceneTimeAtackRunPauseWindowSaveCompleteName" class="run__pause__txt3">
+                                                &nbsp;
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <a id="sceneTimeAtackRunPauseWindowSaveBtnTweet" class="run__btn-tweet">Tweet</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </div>
+        <!-- #ranking-->
+        <div id="ranking" style="display: none;" class="ranking">
+            <div class="ranking__inner">
+                <ul id="rankingList" class="ranking__list">
+                    <li>
+                        <div class="rankingListRank ranking__list__box-rank">
+                            1
+                        </div>
+                        <div class="rankingListTime ranking__list__box-time">
+                            00:00:00
+                        </div>
+                        <div class="rankingListName ranking__list__box-name">
+                            &nbsp;
+                        </div>
+                        <div class="rankingListComment ranking__list__box-comment">
+                            &nbsp;
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- #error-->
+    <div id="error" style="display: none;" class="error">
+        <div class="error__inner-cm">
+            <h1 class="error__ttl">
+                <span class="error__ttl__txt">JS Racing</span><span class="error__ttl__txt2">&nbsp;ver1.2</span>
+            </h1>
+            <p id="errorMsg" class="error__msg"></p>
+        </div>
+    </div>
+    <!-- #footer-->
+    <div id="footer" class="footer">
+        <div class="footer__inner">
+            <div class="footer__box">
+                <div class="footer__box-left">
+                    <div class="footer__fb">
+                        <div class="fb-share-button" data-href="http://js-racing.knockknock.jp/" data-width="100" data-type="button_count"></div>
+                    </div>
+                    <div class="footer__tw">
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="JS-Racing">Tweet</a>
+                        <script>
+                            !function (d, s, id) {
+                                var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                                if (!d.getElementById(id)) {
+                                    js = d.createElement(s);
+                                    js.id = id;
+                                    js.src = p + '://platform.twitter.com/widgets.js';
+                                    fjs.parentNode.insertBefore(js, fjs);
+                                }
+                            } (document, 'script', 'twitter-wjs');
+                        </script>
+                    </div>
+                </div>
+                <div class="footer__box-right">
+                    <p class="footer__copy">
+                        <small>&copy;copyright 2014&nbsp;<a href="http://www.knockknock.jp/" target="_blank" class="footer__link">knockknock.jp</a>.</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- JS-->
+    <!--<script src="/socket.io/socket.io.js"></script>-->
+    <script src="js/lib/Stats.js"></script>
+    <script src="js/lib/jquery-1.10.1.min.js"></script>
+    <script src="node_modules/three/build/three.min.js"></script>
+    <script src="js/lib/OrbitControls.js"></script>
+    <script src="js/lib/OBJLoader.js"></script>
+    <script src="js/lib/MTLLoader.js"></script>
+    <script src="js/lib/OBJMTLLoader.js"></script>
+    <script src="js/lib/Box2dWeb-2.1.a.3.js"></script>
+    <script src="js/lib/lib.js"></script>
+    <script src="js/imjcart.js"></script>
+    <script src="js/index.js"></script>
+    <!-- GA-->
+</body>
+</html>

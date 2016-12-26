@@ -3,7 +3,13 @@
 /// <reference path="../../../../lib/lib.ts"/>
 /// <reference path="../../../../imjcart/logic/utility/Util.ts"/>
 
+
+declare namespace THREE {
+    export var OBJMTLLoader: any;
+};
+
 module imjcart.display.main.view3d {
+
 
     export class Car extends lib.event.EventDispacher {
 
@@ -38,29 +44,30 @@ module imjcart.display.main.view3d {
             loader.load("models/car03/car03.obj", "models/car03/car03.mtl", (object) => {
                 object.traverse(function (child) {
                     if (child instanceof THREE.Mesh) {
+                        let material = <any>child.material;
                         switch (child.material.name) {
                             case "Body":
-                                child.material.ambient = new THREE.Color(bodyColor);
-                                child.material.color = new THREE.Color(bodyColor);
+                                material.ambient = new THREE.Color(bodyColor);
+                                material.color = new THREE.Color(bodyColor);
                                 break;
                             case "Wing":
-                                child.material.ambient = new THREE.Color(windColor);
-                                child.material.color = new THREE.Color(windColor);
+                                material.ambient = new THREE.Color(windColor);
+                                material.color = new THREE.Color(windColor);
                                 break;
                             case "Chassis":
-                                child.material.ambient = new THREE.Color(0x111111);
-                                child.material.color = new THREE.Color(0x111111);
+                                material.ambient = new THREE.Color(0x111111);
+                                material.color = new THREE.Color(0x111111);
                                 break;
                             default:
-                                child.material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
+                                material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
                                 break;
                         }
-                        child.material.side = THREE.DoubleSide;
-                        child.material.specular = 0xffffff;
-                        child.material.shininess = 200;
-                        child.material.metal = true;
+                        material.side = THREE.DoubleSide;
+                        material.specular = 0xffffff;
+                        material.shininess = 200;
+                        material.metal = true;
                         //child.material = new THREE.MeshLambertMaterial(child.material);
-                        child.material = new THREE.MeshPhongMaterial(child.material);
+                        child.material = new THREE.MeshPhongMaterial(material);
                         if (imjcart.logic.value.Const.IS_SHADOW_ENABLED) {
                             child.castShadow = true;
                         }
@@ -74,17 +81,18 @@ module imjcart.display.main.view3d {
             loader.load("models/car02/driver01.obj", "models/car02/driver01.mtl", (object) => {
                 object.traverse(function (child) {
                     if (child instanceof THREE.Mesh) {
+                        let material = <any>child.material;
                         switch (child.material.name) {
                             case "DriverHead":
-                                child.material.ambient = new THREE.Color(driverHeadColor);
-                                child.material.color = new THREE.Color(driverHeadColor);
+                                material.ambient = new THREE.Color(driverHeadColor);
+                                material.color = new THREE.Color(driverHeadColor);
                                 break;
                             case "DriverBody":
-                                child.material.ambient = new THREE.Color(driverBodyColor);
-                                child.material.color = new THREE.Color(driverBodyColor);
+                                material.ambient = new THREE.Color(driverBodyColor);
+                                material.color = new THREE.Color(driverBodyColor);
                                 break;
                             default:
-                                child.material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
+                                material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
                                 break;
                         }
                         child.material.side = THREE.DoubleSide;
@@ -99,30 +107,30 @@ module imjcart.display.main.view3d {
             loader.load("models/car02/handle01.obj", "models/car02/handle01.mtl", (object) => {
                 object.traverse(function (child) {
                     if (child instanceof THREE.Mesh) {
-                        let material = <THREE.MeshLambertMaterialParameters>child.material;
+                        let material = <any>child.material;
                         switch (child.material.name) {
                             case "Body":
-                                child.material.ambient = new THREE.Color(0x333333);
-                                child.material.color = new THREE.Color(0x333333);
+                                material.ambient = new THREE.Color(0x333333);
+                                material.color = new THREE.Color(0x333333);
                                 break;
                             case "Screen":
-                                child.material.ambient = new THREE.Color(0x339999);
-                                child.material.color = new THREE.Color(0x339999);
+                                material.ambient = new THREE.Color(0x339999);
+                                material.color = new THREE.Color(0x339999);
                                 break;
                             case "ButtonR":
-                                child.material.ambient = new THREE.Color(0xFF0000);
-                                child.material.color = new THREE.Color(0xFF0000);
+                                material.ambient = new THREE.Color(0xFF0000);
+                                material.color = new THREE.Color(0xFF0000);
                                 break;
                             case "ButtonB":
-                                child.material.ambient = new THREE.Color(0x0000FF);
-                                child.material.color = new THREE.Color(0x0000FF);
+                                material.ambient = new THREE.Color(0x0000FF);
+                                material.color = new THREE.Color(0x0000FF);
                                 break;
                             case "ButtonY":
-                                child.material.ambient = new THREE.Color(0xFFCC00);
-                                child.material.color = new THREE.Color(0xFFCC00);
+                                material.ambient = new THREE.Color(0xFFCC00);
+                                material.color = new THREE.Color(0xFFCC00);
                                 break;
                             default:
-                                child.material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
+                                material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
                                 break;
                         }
                         child.material.side = THREE.DoubleSide;
@@ -138,21 +146,22 @@ module imjcart.display.main.view3d {
             loader.load("models/wheel01/wheel01.obj", "models/wheel01/wheel01.mtl", (object) => {
                 object.traverse(function (child) {
                     if (child instanceof THREE.Mesh) {
+                        let material = <any>child.material;
                         switch (child.material.name) {
                             case "Wheel":
-                                child.material.ambient = new THREE.Color(0x333333);
-                                child.material.color = new THREE.Color(0x333333);
+                                material.ambient = new THREE.Color(0x333333);
+                                material.color = new THREE.Color(0x333333);
                                 break;
                             case "Tire":
-                                child.material.ambient = new THREE.Color(0x000000);
-                                child.material.color = new THREE.Color(0x000000);
+                                material.ambient = new THREE.Color(0x000000);
+                                material.color = new THREE.Color(0x000000);
                                 break;
                             default:
-                                child.material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
+                                material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
                                 break;
                         }
-                        child.material.side = THREE.DoubleSide;
-                        child.material = new THREE.MeshLambertMaterial(child.material);
+                        material.side = THREE.DoubleSide;
+                        child.material = new THREE.MeshLambertMaterial(material);
                         if (imjcart.logic.value.Const.IS_SHADOW_ENABLED) {
                             child.castShadow = true;
                         }

@@ -3,75 +3,70 @@
 /// <reference path="../../../imjcart/logic/value/GlobalValue.ts"/>
 /// <reference path="../../../imjcart/logic/value/Const.ts"/>
 /// <reference path="../../../imjcart/logic/controller/Controller.ts"/>
-var __extends = this.__extends || function (d, b) {
+var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var imjcart;
 (function (imjcart) {
+    var logic;
     (function (logic) {
+        var socket;
         (function (socket) {
             var SocketMain = (function (_super) {
                 __extends(SocketMain, _super);
                 function SocketMain() {
-                    var _this = this;
-                    _super.call(this);
-                    this._window = null;
-                    this._socket = null;
-                    this._name = null;
-                    this._x = null;
-                    this._y = null;
-                    this._bodyAngle = null;
-                    this._wheelAngle = null;
-                    this._speed = null;
-                    this._colorBody = null;
-                    this._colorWing = null;
-                    this._colorDriver = null;
-                    this._isFirst = true;
-                    this._isChangeCarCondition = false;
-                    this._id = null;
-                    this._carConditionArr = [];
-                    this._window = window;
-                    this._socket = this._window.socket || null;
-                    if (!this._socket)
-                        return;
-
+                    var _this = _super.call(this) || this;
+                    _this._window = null;
+                    _this._socket = null;
+                    _this._name = null;
+                    _this._x = null;
+                    _this._y = null;
+                    _this._bodyAngle = null;
+                    _this._wheelAngle = null;
+                    _this._speed = null;
+                    _this._colorBody = null;
+                    _this._colorWing = null;
+                    _this._colorDriver = null;
+                    _this._isFirst = true;
+                    _this._isChangeCarCondition = false;
+                    _this._id = null;
+                    _this._carConditionArr = [];
+                    _this._window = window;
+                    _this._socket = _this._window.socket || null;
+                    if (!_this._socket)
+                        return _this;
                     //
                     // ---------- イベント ---------- //
                     //
                     // サーバからソケットIDを受信
-                    this._socket.on("emit_id_form_server", function (data) {
+                    _this._socket.on("emit_id_form_server", function (data) {
                         _this._emitIdFormServer(data);
                     });
-
                     // サーバから車情報を受信
-                    this._socket.on("emit_other_carcondition_from_server", function (data) {
+                    _this._socket.on("emit_other_carcondition_from_server", function (data) {
                         _this._emitOtherCarConditionFromServer(data);
                     });
-
                     // サーバーからコントローラー情報を受信
-                    this._socket.on("emit_controller_data_from_server", function (data) {
+                    _this._socket.on("emit_controller_data_from_server", function (data) {
                         _this._emitControllerDataFromServer(data);
                     });
-
                     // サーバからランキングデータ受信
-                    this._socket.on("get_ranking_from_server", function (data) {
+                    _this._socket.on("get_ranking_from_server", function (data) {
                         _this._getRankingFromServer(data);
                     });
-
                     // ラップタイムデータ保存完了
-                    this._socket.on("save_laptime_from_server", function (data) {
+                    _this._socket.on("save_laptime_from_server", function (data) {
                         _this._saveLaptimeFromServer(data);
                     });
-
                     // 車情報をサーバに送信
                     setInterval(function () {
                         if (!_this._isChangeCarCondition)
                             return;
                         _this._emitCarCondition();
                     }, 1000 / imjcart.logic.value.Const.SOCKET_EMIT_OTHER_CARS_CONDITION_FPS);
+                    return _this;
                 }
                 SocketMain.prototype.setCarCondition = function () {
                     if (!this._socket)
@@ -91,7 +86,6 @@ var imjcart;
                         this._emitCarCondition();
                         return;
                     }
-
                     //
                     this._isChangeCarCondition = false;
                     var x = Math.floor(values.carInfo.x * 1000) / 1000;
@@ -120,7 +114,6 @@ var imjcart;
                         this._isChangeCarCondition = true;
                     }
                 };
-
                 SocketMain.prototype._emitCarCondition = function () {
                     if (!this._socket)
                         return;
@@ -136,15 +129,12 @@ var imjcart;
                         name: this._name
                     });
                 };
-
                 SocketMain.prototype._emitIdFormServer = function (val) {
                     this._id = val;
-
                     // サーバーからソケットIDを取得したイベント
                     var values = imjcart.logic.value.GlobalValue.getInstance();
                     values.main.dispatchEvent(imjcart.logic.event.ProjectEvent.EMIT_ID_FROM_SERVER_EVENT, { id: this._id });
                 };
-
                 SocketMain.prototype._emitOtherCarConditionFromServer = function (arr) {
                     // 追加されている車を抽出
                     var addCarArr = [];
@@ -169,7 +159,6 @@ var imjcart;
                         var values = imjcart.logic.value.GlobalValue.getInstance();
                         values.main.dispatchEvent(imjcart.logic.event.ProjectEvent.ADD_OTHER_CAR_EVENT, addCarArr[i]);
                     }
-
                     // 削除されている車を抽出
                     var removeCarArr = [];
                     for (i = 0, max = this._carConditionArr.length; i < max; i = i + 1) {
@@ -191,53 +180,50 @@ var imjcart;
                         var values = imjcart.logic.value.GlobalValue.getInstance();
                         values.main.dispatchEvent(imjcart.logic.event.ProjectEvent.REMOVE_OTHER_CAR_EVENT, removeCarArr[i]);
                     }
-
                     // 他の車の描画更新イベント
                     var values = imjcart.logic.value.GlobalValue.getInstance();
                     values.main.dispatchEvent(imjcart.logic.event.ProjectEvent.RENDER_OTHER_CAR_EVENT, arr);
-
                     //
                     this._carConditionArr = arr;
                 };
-
                 SocketMain.prototype._emitControllerDataFromServer = function (params) {
                     var id = params.id;
                     var event = params.event;
                     var value = params.value;
                     var controller = imjcart.logic.controller.Controller.getInstance();
                     switch (event) {
+                        // PLAY
                         case imjcart.logic.value.Const.CONTROLLER_EVENT_KEY_PLAY:
                             // シーン変更イベント
                             var values = imjcart.logic.value.GlobalValue.getInstance();
                             values.main.dispatchEvent(imjcart.logic.event.ProjectEvent.CHANGE_SCENE_EVENT, { id: imjcart.logic.value.Const.ID_SCENE_TIMEATACK });
                             break;
-
+                        // エンジンスタート
                         case imjcart.logic.value.Const.CONTROLLER_EVENT_KEY_START_ENGINE:
                             controller.startEngine({
                                 value: value
                             });
                             break;
-
+                        // エンジンストップ
                         case imjcart.logic.value.Const.CONTROLLER_EVENT_KEY_STOP_ENGINE:
                             controller.stopEngine();
                             break;
-
+                        // ステアリング設定
                         case imjcart.logic.value.Const.CONTROLLER_EVENT_KEY_SET_STEERING_ANGLE:
                             controller.setSteeringAngle({
                                 value: value
                             });
                             break;
-
+                        // ステアリングを戻す
                         case imjcart.logic.value.Const.CONTROLLER_EVENT_KEY_CLEAR_STEERING_ANGLE:
                             controller.clearSteeringAngle();
                             break;
-
+                        // カメラアングル変更
                         case imjcart.logic.value.Const.CONTROLLER_EVENT_KEY_CHANGE_CAMERA_ANGLE:
                             controller.changeCameraAngle();
                             break;
                     }
                 };
-
                 // ランキングデータリクエスト
                 SocketMain.prototype.getRankingFromClient = function (skip, limit) {
                     this._socket.emit("get_ranking_from_client", {
@@ -245,7 +231,6 @@ var imjcart;
                         limit: limit
                     });
                 };
-
                 SocketMain.prototype._getRankingFromServer = function (params) {
                     var lapTimeInfoArr = [];
                     var i = 0, max;
@@ -261,23 +246,11 @@ var imjcart;
                         var colorDriver = params[i].color.driver;
                         var runningPath = params[i].runningPath;
                         lapTimeInfoArr.push(new imjcart.logic.info.LapTimeInfo(id, time, rank, length, name, comment, colorBody, colorWing, colorDriver, runningPath));
-                        /*
-                        if (params[i].runningPath && params[i].runningPath != "" && params[i].runningPath.length) {
-                        console.log("走行記録受信");
-                        console.log(name);
-                        console.log(colorBody);
-                        console.log(colorWing);
-                        console.log(colorDriver);
-                        console.log(runningPath)
-                        }
-                        */
                     }
-
                     // ランキングデータ受信イベント
                     var values = imjcart.logic.value.GlobalValue.getInstance();
                     values.main.dispatchEvent(imjcart.logic.event.ProjectEvent.GET_RANKING_FROM_SERVER_EVENT, { lapTimeInfoArr: lapTimeInfoArr });
                 };
-
                 // ラップタイムデータ保存
                 SocketMain.prototype.saveLaptimeFromClient = function () {
                     if (!this._socket)
@@ -301,7 +274,6 @@ var imjcart;
                     //console.log(values.carInfo.runningPath.collection);
                     //console.log(values.fastestRunningPathCollection);
                 };
-
                 SocketMain.prototype._saveLaptimeFromServer = function (params) {
                     var id = params.id;
                     var time = params.time;
@@ -313,16 +285,14 @@ var imjcart;
                     var colorWing = params.colorWing;
                     var colorDriver = params.colorDriver;
                     var lapTimeInfo = new imjcart.logic.info.LapTimeInfo(id, time, rank, length, name, comment, colorBody, colorWing, colorDriver);
-
                     // ラップタイムデータ保存完了
                     var values = imjcart.logic.value.GlobalValue.getInstance();
                     values.main.dispatchEvent(imjcart.logic.event.ProjectEvent.COMPLETE_SAVE_LAPTIME_EVENT, { lapTimeInfo: lapTimeInfo });
                 };
                 return SocketMain;
-            })(lib.event.EventDispacher);
+            }(lib.event.EventDispacher));
             socket.SocketMain = SocketMain;
-        })(logic.socket || (logic.socket = {}));
-        var socket = logic.socket;
-    })(imjcart.logic || (imjcart.logic = {}));
-    var logic = imjcart.logic;
+        })(socket = logic.socket || (logic.socket = {}));
+    })(logic = imjcart.logic || (imjcart.logic = {}));
 })(imjcart || (imjcart = {}));
+//# sourceMappingURL=SocketMain.js.map

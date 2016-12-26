@@ -1,68 +1,68 @@
 /// <reference path="../../../../lib/jquery.d.ts"/>
 /// <reference path="../../../../lib/box2dweb.d.ts"/>
-/// <reference path="../../../../lib/three.d.ts"/>
 /// <reference path="../../../../lib/lib.ts"/>
 /// <reference path="../../../../imjcart/logic/map/value/MapConst.ts"/>
 /// <reference path="../../../../imjcart/logic/utility/Util.ts"/>
-var __extends = this.__extends || function (d, b) {
+var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var imjcart;
 (function (imjcart) {
+    var display;
     (function (display) {
+        var main;
         (function (main) {
+            var view3d;
             (function (view3d) {
                 var Cource = (function (_super) {
                     __extends(Cource, _super);
                     function Cource(scene) {
-                        _super.call(this);
-                        this._scene = null;
-                        this._startline = null;
-                        this._carLine = null;
-                        this._base = null;
-                        this._grass = null;
-                        this._grassLT = null;
-                        this._grassLB = null;
-                        this._grassRT = null;
-                        this._grassRB = null;
-                        this._sand = null;
-                        this._tree = null;
-                        this._tire = null;
-                        this._wall = null;
-                        this._block = null;
-                        this._map = null;
-                        this._sandMap = null;
-                        this._grassMap = null;
-                        this._roadMap = null;
-                        this._goal = null;
-                        this._scene = scene;
-
+                        var _this = _super.call(this) || this;
+                        _this._scene = null;
+                        _this._startline = null;
+                        _this._carLine = null;
+                        _this._base = null;
+                        _this._grass = null;
+                        _this._grassLT = null;
+                        _this._grassLB = null;
+                        _this._grassRT = null;
+                        _this._grassRB = null;
+                        _this._sand = null;
+                        _this._tree = null;
+                        _this._tire = null;
+                        _this._wall = null;
+                        _this._block = null;
+                        _this._map = null;
+                        _this._sandMap = null;
+                        _this._grassMap = null;
+                        _this._roadMap = null;
+                        _this._goal = null;
+                        _this._scene = scene;
                         //
-                        this._initGrassMap();
-                        this._initRoadMap();
-                        this._initSandMap();
-
+                        _this._initGrassMap();
+                        _this._initRoadMap();
+                        _this._initSandMap();
                         //
-                        this._createBase();
-                        this._createRoadLine();
-                        this._createCarLine();
-                        this._createGrass();
-                        this._createGrassLT();
-                        this._createGrassLB();
-                        this._createGrassRT();
-                        this._createGrassRB();
-                        this._createStartline();
-                        this._createWall();
-                        this._createBlock();
-                        this._createTire();
-                        this._createTree();
-                        this._createSand();
-                        this._createSandLine();
-                        this._createSandLine2();
-                        this._createGoal();
+                        _this._createBase();
+                        _this._createRoadLine();
+                        _this._createCarLine();
+                        _this._createGrass();
+                        _this._createGrassLT();
+                        _this._createGrassLB();
+                        _this._createGrassRT();
+                        _this._createGrassRB();
+                        _this._createStartline();
+                        _this._createWall();
+                        _this._createBlock();
+                        _this._createTire();
+                        _this._createTree();
+                        _this._createSand();
+                        _this._createSandLine();
+                        _this._createSandLine2();
+                        _this._createGoal();
+                        return _this;
                     }
                     // 道路端の線を作るマップを作成
                     Cource.prototype._initRoadMap = function () {
@@ -72,9 +72,14 @@ var imjcart;
                         for (i = 0, max = imjcart.logic.map.value.MapConst.MAP.length; i < max; i = i + 1) {
                             var arr = [];
                             for (j = 0, max2 = imjcart.logic.map.value.MapConst.MAP[i].length; j < max2; j = j + 1) {
-                                if (imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_GRASS || imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_TIRE || imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_TREE || imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_BLOCK || imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_WALL) {
+                                if (imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_GRASS
+                                    || imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_TIRE
+                                    || imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_TREE
+                                    || imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_BLOCK
+                                    || imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_WALL) {
                                     arr.push(null);
-                                } else {
+                                }
+                                else {
                                     arr.push("C");
                                 }
                             }
@@ -96,18 +101,20 @@ var imjcart;
                                     }
                                     if (left == null && right != null && top != null && bottom != null) {
                                         this._roadMap[i][j] = "L";
-                                    } else if (left != null && right == null && top != null && bottom != null) {
+                                    }
+                                    else if (left != null && right == null && top != null && bottom != null) {
                                         this._roadMap[i][j] = "R";
-                                    } else if (left != null && right != null && top == null && bottom != null) {
+                                    }
+                                    else if (left != null && right != null && top == null && bottom != null) {
                                         this._roadMap[i][j] = "T";
-                                    } else if (left != null && right != null && top != null && bottom == null) {
+                                    }
+                                    else if (left != null && right != null && top != null && bottom == null) {
                                         this._roadMap[i][j] = "B";
                                     }
                                 }
                             }
                         }
                     };
-
                     // 芝生同士を斜めにつないで、芝生マップを作成
                     Cource.prototype._initGrassMap = function () {
                         this._map = imjcart.logic.map.value.MapConst.MAP.concat();
@@ -116,9 +123,13 @@ var imjcart;
                         for (i = 0, max = imjcart.logic.map.value.MapConst.MAP.length; i < max; i = i + 1) {
                             var arr = [];
                             for (j = 0, max2 = imjcart.logic.map.value.MapConst.MAP[i].length; j < max2; j = j + 1) {
-                                if (imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_GRASS || imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_TIRE || imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_TREE || imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_SAND) {
+                                if (imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_GRASS
+                                    || imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_TIRE
+                                    || imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_TREE
+                                    || imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_SAND) {
                                     arr.push("G");
-                                } else {
+                                }
+                                else {
                                     arr.push(null);
                                 }
                             }
@@ -128,57 +139,78 @@ var imjcart;
                             for (j = 0, max2 = imjcart.logic.map.value.MapConst.MAP[i].length; j < max2; j = j + 1) {
                                 if (imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_GRASS) {
                                     // 左上
-                                    if (imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_GRASS || imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_TIRE || imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_BLOCK || imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_WALL || imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_TREE) {
+                                    if (imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_GRASS
+                                        || imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_TIRE
+                                        || imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_BLOCK
+                                        || imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_WALL
+                                        || imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_TREE) {
                                         if (this._grassMap[i - 1][j] == "LT" || this._grassMap[i - 1][j] == "RT" || this._grassMap[i - 1][j] == "RB") {
                                             this._grassMap[i - 1][j] = "G";
-                                        } else if (this._grassMap[i - 1][j] != "G") {
+                                        }
+                                        else if (this._grassMap[i - 1][j] != "G") {
                                             this._grassMap[i - 1][j] = "LB";
                                         }
                                         if (this._grassMap[i][j - 1] == "LT" || this._grassMap[i][j - 1] == "LB" || this._grassMap[i][j - 1] == "RB") {
                                             this._grassMap[i][j - 1] = "G";
-                                        } else if (this._grassMap[i][j - 1] != "G") {
+                                        }
+                                        else if (this._grassMap[i][j - 1] != "G") {
                                             this._grassMap[i][j - 1] = "RT";
                                         }
                                     }
-
                                     // 左下
-                                    if (imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_GRASS || imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_TIRE || imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_BLOCK || imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_WALL || imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_TREE) {
+                                    if (imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_GRASS
+                                        || imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_TIRE
+                                        || imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_BLOCK
+                                        || imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_WALL
+                                        || imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_TREE) {
                                         if (this._grassMap[i + 1][j] == "LB" || this._grassMap[i][j + 1] == "RT" || this._grassMap[i][j + 1] == "RB") {
                                             this._grassMap[i + 1][j] = "G";
-                                        } else if (this._grassMap[i + 1][j] != "G") {
+                                        }
+                                        else if (this._grassMap[i + 1][j] != "G") {
                                             this._grassMap[i + 1][j] = "LT";
                                         }
                                         if (this._grassMap[i][j - 1] == "LT" || this._grassMap[i][j - 1] == "LB" || this._grassMap[i][j - 1] == "RT") {
                                             this._grassMap[i][j - 1] = "G";
-                                        } else if (this._grassMap[i][j - 1] != "G") {
+                                        }
+                                        else if (this._grassMap[i][j - 1] != "G") {
                                             this._grassMap[i][j - 1] = "RB";
                                         }
                                     }
-
                                     // 右上
-                                    if (imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_GRASS || imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_TIRE || imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_BLOCK || imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_WALL || imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_TREE) {
+                                    if (imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_GRASS
+                                        || imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_TIRE
+                                        || imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_BLOCK
+                                        || imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_WALL
+                                        || imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_TREE) {
                                         if (this._grassMap[i][j + 1] == "LB" || this._grassMap[i][j + 1] == "LB" || this._grassMap[i][j + 1] == "RB") {
                                             this._grassMap[i][j + 1] = "G";
-                                        } else if (this._grassMap[i][j + 1] != "G") {
+                                        }
+                                        else if (this._grassMap[i][j + 1] != "G") {
                                             this._grassMap[i][j + 1] = "LT";
                                         }
                                         if (this._grassMap[i - 1][j] == "LB" || this._grassMap[i - 1][j] == "LB" || this._grassMap[i - 1][j] == "RT") {
                                             this._grassMap[i - 1][j] = "G";
-                                        } else if (this._grassMap[i - 1][j] != "G") {
+                                        }
+                                        else if (this._grassMap[i - 1][j] != "G") {
                                             this._grassMap[i - 1][j] = "RB";
                                         }
                                     }
-
                                     // 右下
-                                    if (imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_GRASS || imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_TIRE || imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_BLOCK || imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_WALL || imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_TREE) {
+                                    if (imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_GRASS
+                                        || imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_TIRE
+                                        || imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_BLOCK
+                                        || imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_WALL
+                                        || imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_TREE) {
                                         if (this._grassMap[i + 1][j] == "LT" || this._grassMap[i + 1][j] == "LB" || this._grassMap[i + 1][j] == "RB") {
                                             this._grassMap[i + 1][j] = "G";
-                                        } else if (this._grassMap[i + 1][j] != "G") {
+                                        }
+                                        else if (this._grassMap[i + 1][j] != "G") {
                                             this._grassMap[i + 1][j] = "RT";
                                         }
                                         if (this._grassMap[i][j + 1] == "LT" || this._grassMap[i][j + 1] == "RT" || this._grassMap[i][j + 1] == "RB") {
                                             this._grassMap[i][j + 1] = "G";
-                                        } else if (this._grassMap[i][j + 1] != "G") {
+                                        }
+                                        else if (this._grassMap[i][j + 1] != "G") {
                                             this._grassMap[i][j + 1] = "LB";
                                         }
                                     }
@@ -186,7 +218,6 @@ var imjcart;
                             }
                         }
                     };
-
                     // 砂地同士を斜めにつないで、砂地マップを作成
                     Cource.prototype._initSandMap = function () {
                         this._map = imjcart.logic.map.value.MapConst.MAP.concat();
@@ -197,7 +228,8 @@ var imjcart;
                             for (j = 0, max2 = imjcart.logic.map.value.MapConst.MAP[i].length; j < max2; j = j + 1) {
                                 if (imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_SAND) {
                                     arr.push("S");
-                                } else {
+                                }
+                                else {
                                     arr.push(null);
                                 }
                             }
@@ -207,57 +239,70 @@ var imjcart;
                             for (j = 0, max2 = imjcart.logic.map.value.MapConst.MAP[i].length; j < max2; j = j + 1) {
                                 if (imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_SAND) {
                                     // 左上
-                                    if (imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_SAND || imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_BLOCK || imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_WALL) {
+                                    if (imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_SAND
+                                        || imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_BLOCK
+                                        || imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_WALL) {
                                         if (this._sandMap[i - 1][j] == "LT" || this._sandMap[i - 1][j] == "RT" || this._sandMap[i - 1][j] == "RB") {
                                             this._sandMap[i - 1][j] = "S";
-                                        } else if (this._sandMap[i - 1][j] != "S") {
+                                        }
+                                        else if (this._sandMap[i - 1][j] != "S") {
                                             this._sandMap[i - 1][j] = "LB";
                                         }
                                         if (this._sandMap[i][j - 1] == "LT" || this._sandMap[i][j - 1] == "LB" || this._sandMap[i][j - 1] == "RB") {
                                             this._sandMap[i][j - 1] = "S";
-                                        } else if (this._sandMap[i][j - 1] != "S") {
+                                        }
+                                        else if (this._sandMap[i][j - 1] != "S") {
                                             this._sandMap[i][j - 1] = "RT";
                                         }
                                     }
-
                                     // 左下
-                                    if (imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_SAND || imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_BLOCK || imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_WALL) {
+                                    if (imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_SAND
+                                        || imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_BLOCK
+                                        || imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_WALL) {
                                         if (this._sandMap[i + 1][j] == "LB" || this._sandMap[i][j + 1] == "RT" || this._sandMap[i][j + 1] == "RB") {
                                             this._sandMap[i + 1][j] = "S";
-                                        } else if (this._sandMap[i + 1][j] != "S") {
+                                        }
+                                        else if (this._sandMap[i + 1][j] != "S") {
                                             this._sandMap[i + 1][j] = "LT";
                                         }
                                         if (this._sandMap[i][j - 1] == "LT" || this._sandMap[i][j - 1] == "LB" || this._sandMap[i][j - 1] == "RT") {
                                             this._sandMap[i][j - 1] = "S";
-                                        } else if (this._sandMap[i][j - 1] != "S") {
+                                        }
+                                        else if (this._sandMap[i][j - 1] != "S") {
                                             this._sandMap[i][j - 1] = "RB";
                                         }
                                     }
-
                                     // 右上
-                                    if (imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_SAND || imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_BLOCK || imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_WALL) {
+                                    if (imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_SAND
+                                        || imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_BLOCK
+                                        || imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_WALL) {
                                         if (this._sandMap[i][j + 1] == "LB" || this._sandMap[i][j + 1] == "LB" || this._sandMap[i][j + 1] == "RB") {
                                             this._sandMap[i][j + 1] = "S";
-                                        } else if (this._sandMap[i][j + 1] != "S") {
+                                        }
+                                        else if (this._sandMap[i][j + 1] != "S") {
                                             this._sandMap[i][j + 1] = "LT";
                                         }
                                         if (this._sandMap[i - 1][j] == "LB" || this._sandMap[i - 1][j] == "LB" || this._sandMap[i - 1][j] == "RT") {
                                             this._sandMap[i - 1][j] = "S";
-                                        } else if (this._sandMap[i - 1][j] != "S") {
+                                        }
+                                        else if (this._sandMap[i - 1][j] != "S") {
                                             this._sandMap[i - 1][j] = "RB";
                                         }
                                     }
-
                                     // 右下
-                                    if (imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_SAND || imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_BLOCK || imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_WALL) {
+                                    if (imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_SAND
+                                        || imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_BLOCK
+                                        || imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_WALL) {
                                         if (this._sandMap[i + 1][j] == "LT" || this._sandMap[i + 1][j] == "LB" || this._sandMap[i + 1][j] == "RB") {
                                             this._sandMap[i + 1][j] = "S";
-                                        } else if (this._sandMap[i + 1][j] != "S") {
+                                        }
+                                        else if (this._sandMap[i + 1][j] != "S") {
                                             this._sandMap[i + 1][j] = "RT";
                                         }
                                         if (this._sandMap[i][j + 1] == "LT" || this._sandMap[i][j + 1] == "RT" || this._sandMap[i][j + 1] == "RB") {
                                             this._sandMap[i][j + 1] = "S";
-                                        } else if (this._sandMap[i][j + 1] != "S") {
+                                        }
+                                        else if (this._sandMap[i][j + 1] != "S") {
                                             this._sandMap[i][j + 1] = "LB";
                                         }
                                     }
@@ -265,12 +310,10 @@ var imjcart;
                             }
                         }
                     };
-
                     // コース土台
                     Cource.prototype._createBase = function () {
                         var geometry = new THREE.Geometry();
                         var texture = THREE.ImageUtils.loadTexture("img/base.jpg");
-
                         //texture.minFilter = THREE.NearestFilter;
                         //texture.magFilter = THREE.LinearMipMapLinearFilter;
                         var material = null;
@@ -279,12 +322,13 @@ var imjcart;
                                 color: 0xffffff,
                                 specular: 0x999999,
                                 shininess: 10,
-                                ambient: imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR,
+                                // ambient: imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR,
                                 map: texture,
                                 bumpMap: texture,
                                 bumpScale: 0.1
                             });
-                        } else {
+                        }
+                        else {
                             material = new THREE.MeshBasicMaterial({ map: texture });
                         }
                         var i, j, max, max2;
@@ -302,7 +346,6 @@ var imjcart;
                         }
                         this._scene.add(this._base);
                     };
-
                     // コースライン
                     Cource.prototype._createRoadLine = function () {
                         var geometry = new THREE.Geometry();
@@ -322,13 +365,16 @@ var imjcart;
                                     mesh.rotation.x = imjcart.logic.utility.Util.getAngleByRotation(-90);
                                     if (this._roadMap[i][j] == "L") {
                                         THREE.GeometryUtils.merge(geometry, mesh);
-                                    } else if (this._roadMap[i][j] == "R") {
+                                    }
+                                    else if (this._roadMap[i][j] == "R") {
                                         mesh.rotation.z = imjcart.logic.utility.Util.getAngleByRotation(-180);
                                         THREE.GeometryUtils.merge(geometry, mesh);
-                                    } else if (this._roadMap[i][j] == "T") {
+                                    }
+                                    else if (this._roadMap[i][j] == "T") {
                                         mesh.rotation.z = imjcart.logic.utility.Util.getAngleByRotation(-90);
                                         THREE.GeometryUtils.merge(geometry, mesh);
-                                    } else if (this._roadMap[i][j] == "B") {
+                                    }
+                                    else if (this._roadMap[i][j] == "B") {
                                         mesh.rotation.z = imjcart.logic.utility.Util.getAngleByRotation(90);
                                         THREE.GeometryUtils.merge(geometry, mesh);
                                     }
@@ -341,7 +387,6 @@ var imjcart;
                         }
                         this._scene.add(mesh);
                     };
-
                     // 車ライン
                     Cource.prototype._createCarLine = function () {
                         var geometry = new THREE.Geometry();
@@ -354,14 +399,15 @@ var imjcart;
                                 color: 0xffffff,
                                 specular: 0x999999,
                                 shininess: 10,
-                                ambient: imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR,
+                                // ambient: imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR,
                                 map: texture,
                                 bumpMap: texture,
                                 bumpScale: 0.1,
                                 transparent: true,
                                 blending: THREE.NormalBlending
                             });
-                        } else {
+                        }
+                        else {
                             material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, blending: THREE.NormalBlending });
                         }
                         var i, j, max, max2;
@@ -374,7 +420,8 @@ var imjcart;
                                         var x = 0;
                                         if (k % 2) {
                                             x = 6;
-                                        } else {
+                                        }
+                                        else {
                                             x = 0;
                                         }
                                         var mesh = new THREE.Mesh(new THREE.PlaneGeometry(imjcart.logic.map.value.MapConst.MAP_BLOCK_SIZE, imjcart.logic.map.value.MapConst.MAP_BLOCK_SIZE, 1, 1), new THREE.MeshBasicMaterial());
@@ -392,12 +439,10 @@ var imjcart;
                         }
                         this._scene.add(this._carLine);
                     };
-
                     // 芝生
                     Cource.prototype._createGrass = function () {
                         var geometry = new THREE.Geometry();
                         var texture = THREE.ImageUtils.loadTexture("img/grass.jpg");
-
                         //texture.minFilter = THREE.NearestFilter;
                         //texture.magFilter = THREE.LinearMipMapLinearFilter;
                         var material = new THREE.MeshBasicMaterial({ map: texture });
@@ -418,12 +463,10 @@ var imjcart;
                         }
                         this._scene.add(this._grass);
                     };
-
                     // 芝生
                     Cource.prototype._createGrassLT = function () {
                         var geometry = new THREE.Geometry();
                         var texture = THREE.ImageUtils.loadTexture("img/grassLT.png");
-
                         //texture.minFilter = THREE.NearestFilter;
                         //texture.magFilter = THREE.LinearMipMapLinearFilter;
                         var material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, blending: THREE.NormalBlending });
@@ -444,12 +487,10 @@ var imjcart;
                         }
                         this._scene.add(this._grassLT);
                     };
-
                     // 芝生
                     Cource.prototype._createGrassLB = function () {
                         var geometry = new THREE.Geometry();
                         var texture = THREE.ImageUtils.loadTexture("img/grassLB.png");
-
                         //texture.minFilter = THREE.NearestFilter;
                         //texture.magFilter = THREE.LinearMipMapLinearFilter;
                         var material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, blending: THREE.NormalBlending });
@@ -470,12 +511,10 @@ var imjcart;
                         }
                         this._scene.add(this._grassLB);
                     };
-
                     // 芝生
                     Cource.prototype._createGrassRT = function () {
                         var geometry = new THREE.Geometry();
                         var texture = THREE.ImageUtils.loadTexture("img/grassRT.png");
-
                         //texture.minFilter = THREE.NearestFilter;
                         //texture.magFilter = THREE.LinearMipMapLinearFilter;
                         var material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, blending: THREE.NormalBlending });
@@ -496,12 +535,10 @@ var imjcart;
                         }
                         this._scene.add(this._grassRT);
                     };
-
                     // 芝生
                     Cource.prototype._createGrassRB = function () {
                         var geometry = new THREE.Geometry();
                         var texture = THREE.ImageUtils.loadTexture("img/grassRB.png");
-
                         //texture.minFilter = THREE.NearestFilter;
                         //texture.magFilter = THREE.LinearMipMapLinearFilter;
                         var material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, blending: THREE.NormalBlending });
@@ -522,11 +559,9 @@ var imjcart;
                         }
                         this._scene.add(this._grassRB);
                     };
-
                     // スタートライン
                     Cource.prototype._createStartline = function () {
                         var texture = THREE.ImageUtils.loadTexture("img/startline.png");
-
                         //texture.minFilter = THREE.NearestFilter;
                         //texture.magFilter = THREE.LinearMipMapLinearFilter;
                         var geometry = new THREE.Geometry();
@@ -548,7 +583,6 @@ var imjcart;
                         }
                         this._scene.add(this._startline);
                     };
-
                     // 壁
                     Cource.prototype._createWall = function () {
                         var _this = this;
@@ -561,19 +595,18 @@ var imjcart;
                                     //var texture = child.material.map;
                                     //child.material = new THREE.MeshPhongMaterial(child.material);
                                     child.material = new THREE.MeshLambertMaterial(child.material);
-
+                                    var material = child.material;
                                     //child.material.shininess = 3;
                                     //child.material.bumpMap = texture;
                                     //child.material.bumpScale = 0.05;
                                     //child.castShadow = true;
-                                    child.material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
+                                    material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
                                     meshArr.push({
                                         mesh: child,
                                         material: child.material
                                     });
                                 }
                             });
-
                             // 配置
                             var i, j, max, max2;
                             for (i = 0, max = imjcart.logic.map.value.MapConst.MAP.length; i < max; i = i + 1) {
@@ -595,7 +628,6 @@ var imjcart;
                             _this._scene.add(_this._wall);
                         });
                     };
-
                     // ブロック
                     Cource.prototype._createBlock = function () {
                         var _this = this;
@@ -608,19 +640,18 @@ var imjcart;
                                     //var texture = child.material.map;
                                     //child.material = new THREE.MeshPhongMaterial(child.material);
                                     child.material = new THREE.MeshLambertMaterial(child.material);
-
+                                    var material = child.material;
                                     //child.material.shininess = 3;
                                     //child.material.bumpMap = texture;
                                     //child.material.bumpScale = 0.05;
                                     //child.castShadow = true;
-                                    child.material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
+                                    material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
                                     meshArr.push({
                                         mesh: child,
                                         material: child.material
                                     });
                                 }
                             });
-
                             // 配置
                             var i, j, max, max2;
                             for (i = 0, max = imjcart.logic.map.value.MapConst.MAP.length; i < max; i = i + 1) {
@@ -642,7 +673,6 @@ var imjcart;
                             _this._scene.add(_this._block);
                         });
                     };
-
                     // タイヤ
                     Cource.prototype._createTire = function () {
                         var _this = this;
@@ -655,19 +685,18 @@ var imjcart;
                                     //var texture = child.material.map;
                                     //child.material = new THREE.MeshPhongMaterial(child.material);
                                     child.material = new THREE.MeshLambertMaterial(child.material);
-
+                                    var material = child.material;
                                     //child.material.shininess = 3;
                                     //child.material.bumpMap = texture;
                                     //child.material.bumpScale = 0.05;
                                     //child.castShadow = true;
-                                    child.material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
+                                    material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
                                     meshArr.push({
                                         mesh: child,
                                         material: child.material
                                     });
                                 }
                             });
-
                             // 配置
                             var i, j, max, max2;
                             for (i = 0, max = imjcart.logic.map.value.MapConst.MAP.length; i < max; i = i + 1) {
@@ -689,7 +718,6 @@ var imjcart;
                             _this._scene.add(_this._tire);
                         });
                     };
-
                     // 木
                     Cource.prototype._createTree = function () {
                         var _this = this;
@@ -702,19 +730,18 @@ var imjcart;
                                     //var texture = child.material.map;
                                     //child.material = new THREE.MeshPhongMaterial(child.material);
                                     child.material = new THREE.MeshLambertMaterial(child.material);
-
+                                    var material = child.material;
                                     //child.material.shininess = 3;
                                     //child.material.bumpMap = texture;
                                     //child.material.bumpScale = 0.05;
                                     //child.castShadow = true;
-                                    child.material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
+                                    material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
                                     meshArr.push({
                                         mesh: child,
                                         material: child.material
                                     });
                                 }
                             });
-
                             // 配置
                             var i, j, max, max2;
                             for (i = 0, max = imjcart.logic.map.value.MapConst.MAP.length; i < max; i = i + 1) {
@@ -736,7 +763,6 @@ var imjcart;
                             _this._scene.add(_this._tree);
                         });
                     };
-
                     // ゴール
                     Cource.prototype._createGoal = function () {
                         var _this = this;
@@ -744,36 +770,35 @@ var imjcart;
                         loader.load("models/goal01/goal01.obj", "models/goal01/goal01.mtl", function (object) {
                             object.traverse(function (child) {
                                 if (child instanceof THREE.Mesh) {
+                                    var material = child.material;
                                     switch (child.material.name) {
                                         case "PostLeft":
-                                            child.material.ambient = new THREE.Color(0x999999);
-                                            child.material.color = new THREE.Color(0x999999);
+                                            material.ambient = new THREE.Color(0x999999);
+                                            material.color = new THREE.Color(0x999999);
                                             break;
                                         case "PostRight":
-                                            child.material.ambient = new THREE.Color(0x999999);
-                                            child.material.color = new THREE.Color(0x999999);
+                                            material.ambient = new THREE.Color(0x999999);
+                                            material.color = new THREE.Color(0x999999);
                                             break;
                                         case "Banner":
-                                            child.material.ambient = new THREE.Color(0xffffff);
-                                            child.material.color = new THREE.Color(0xffffff);
+                                            material.ambient = new THREE.Color(0xffffff);
+                                            material.color = new THREE.Color(0xffffff);
                                             break;
                                         default:
-                                            child.material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
+                                            material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
                                             break;
                                     }
-                                    child.material.side = THREE.DoubleSide;
-                                    child.material.specular = 0xffffff;
-                                    child.material.shininess = 200;
-                                    child.material.metal = true;
-
+                                    material.side = THREE.DoubleSide;
+                                    material.specular = 0xffffff;
+                                    material.shininess = 200;
+                                    material.metal = true;
                                     //child.material = new THREE.MeshLambertMaterial(child.material);
-                                    child.material = new THREE.MeshPhongMaterial(child.material);
+                                    child.material = new THREE.MeshPhongMaterial(material);
                                     if (imjcart.logic.value.Const.IS_SHADOW_ENABLED) {
                                         child.castShadow = true;
                                     }
                                 }
                             });
-
                             // 配置
                             var i, j, max, max2;
                             for (i = 0, max = imjcart.logic.map.value.MapConst.MAP.length; i < max; i = i + 1) {
@@ -791,12 +816,10 @@ var imjcart;
                             }
                         });
                     };
-
                     // 砂地
                     Cource.prototype._createSand = function () {
                         var geometry = new THREE.Geometry();
                         var texture = THREE.ImageUtils.loadTexture("img/sand.jpg");
-
                         //texture.minFilter = THREE.NearestFilter;
                         //texture.magFilter = THREE.LinearMipMapLinearFilter;
                         var material = null;
@@ -805,14 +828,15 @@ var imjcart;
                                 color: 0xffffff,
                                 specular: 0x999999,
                                 shininess: 10,
-                                ambient: imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR,
+                                // ambient: imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR,
                                 map: texture,
                                 bumpMap: texture,
                                 bumpScale: 0.1,
                                 transparent: true,
                                 blending: THREE.NormalBlending
                             });
-                        } else {
+                        }
+                        else {
                             material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, blending: THREE.NormalBlending });
                         }
                         var i, j, max, max2;
@@ -832,12 +856,10 @@ var imjcart;
                         }
                         this._scene.add(this._sand);
                     };
-
                     // 砂地ライン
                     Cource.prototype._createSandLine = function () {
                         var geometry = new THREE.Geometry();
                         var texture = THREE.ImageUtils.loadTexture("img/sand2.png");
-
                         //texture.minFilter = THREE.NearestFilter;
                         //texture.magFilter = THREE.LinearMipMapLinearFilter;
                         var material = null;
@@ -846,14 +868,15 @@ var imjcart;
                                 color: 0xffffff,
                                 specular: 0x999999,
                                 shininess: 10,
-                                ambient: imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR,
+                                // ambient: imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR,
                                 map: texture,
                                 bumpMap: texture,
                                 bumpScale: 0.1,
                                 transparent: true,
                                 blending: THREE.NormalBlending
                             });
-                        } else {
+                        }
+                        else {
                             material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, blending: THREE.NormalBlending });
                         }
                         var i, j, max, max2;
@@ -869,7 +892,8 @@ var imjcart;
                                     if (this._sandMap[i][j] == "LB") {
                                         mesh.rotation.z = imjcart.logic.utility.Util.getAngleByRotation(0);
                                         THREE.GeometryUtils.merge(geometry, mesh);
-                                    } else if (this._sandMap[i][j] == "RT") {
+                                    }
+                                    else if (this._sandMap[i][j] == "RT") {
                                         mesh.rotation.z = imjcart.logic.utility.Util.getAngleByRotation(180);
                                         THREE.GeometryUtils.merge(geometry, mesh);
                                     }
@@ -882,12 +906,10 @@ var imjcart;
                         }
                         this._scene.add(mesh);
                     };
-
                     // 砂地ライン
                     Cource.prototype._createSandLine2 = function () {
                         var geometry = new THREE.Geometry();
                         var texture = THREE.ImageUtils.loadTexture("img/sand3.png");
-
                         //texture.minFilter = THREE.NearestFilter;
                         //texture.magFilter = THREE.LinearMipMapLinearFilter;
                         var material = null;
@@ -896,14 +918,15 @@ var imjcart;
                                 color: 0xffffff,
                                 specular: 0x999999,
                                 shininess: 10,
-                                ambient: imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR,
+                                // ambient: imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR,
                                 map: texture,
                                 bumpMap: texture,
                                 bumpScale: 0.1,
                                 transparent: true,
                                 blending: THREE.NormalBlending
                             });
-                        } else {
+                        }
+                        else {
                             material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, blending: THREE.NormalBlending });
                         }
                         var i, j, max, max2;
@@ -919,7 +942,8 @@ var imjcart;
                                     if (this._sandMap[i][j] == "LT") {
                                         mesh.rotation.z = imjcart.logic.utility.Util.getAngleByRotation(-90);
                                         THREE.GeometryUtils.merge(geometry, mesh);
-                                    } else if (this._sandMap[i][j] == "RB") {
+                                    }
+                                    else if (this._sandMap[i][j] == "RB") {
                                         mesh.rotation.z = imjcart.logic.utility.Util.getAngleByRotation(90);
                                         THREE.GeometryUtils.merge(geometry, mesh);
                                     }
@@ -933,12 +957,10 @@ var imjcart;
                         this._scene.add(mesh);
                     };
                     return Cource;
-                })(lib.event.EventDispacher);
+                }(lib.event.EventDispacher));
                 view3d.Cource = Cource;
-            })(main.view3d || (main.view3d = {}));
-            var view3d = main.view3d;
-        })(display.main || (display.main = {}));
-        var main = display.main;
-    })(imjcart.display || (imjcart.display = {}));
-    var display = imjcart.display;
+            })(view3d = main.view3d || (main.view3d = {}));
+        })(main = display.main || (display.main = {}));
+    })(display = imjcart.display || (imjcart.display = {}));
 })(imjcart || (imjcart = {}));
+//# sourceMappingURL=Cource.js.map

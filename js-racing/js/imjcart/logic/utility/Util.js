@@ -1,10 +1,11 @@
 /// <reference path="../../../lib/jquery.d.ts"/>
 /// <reference path="../../../lib/box2dweb.d.ts"/>
-/// <reference path="../../../lib/three.d.ts"/>
 /// <reference path="../../../lib/lib.ts"/>
 var imjcart;
 (function (imjcart) {
+    var logic;
     (function (logic) {
+        var utility;
         (function (utility) {
             var Util = (function () {
                 function Util() {
@@ -15,19 +16,17 @@ var imjcart;
                     var min = Math.floor(value / 100 / 60);
                     return Util.zeroFormat(min, 2) + ":" + Util.zeroFormat(sec, 2) + ":" + Math.floor(msec / 10);
                 };
-
                 Util.zeroFormat = function (v, n) {
                     if (n > String(v).length) {
                         return String("0") + v;
-                    } else {
+                    }
+                    else {
                         return String(v);
                     }
                 };
-
                 Util.getAngleByRotation = function (rot) {
                     return rot * Math.PI / 180;
                 };
-
                 Util.shuffle = function (array) {
                     var m = array.length, t, i;
                     while (m) {
@@ -39,10 +38,9 @@ var imjcart;
                     return array;
                 };
                 return Util;
-            })();
+            }());
             utility.Util = Util;
-        })(logic.utility || (logic.utility = {}));
-        var utility = logic.utility;
-    })(imjcart.logic || (imjcart.logic = {}));
-    var logic = imjcart.logic;
+        })(utility = logic.utility || (logic.utility = {}));
+    })(logic = imjcart.logic || (imjcart.logic = {}));
 })(imjcart || (imjcart = {}));
+//# sourceMappingURL=Util.js.map

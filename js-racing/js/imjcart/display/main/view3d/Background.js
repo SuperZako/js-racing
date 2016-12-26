@@ -1,32 +1,33 @@
 /// <reference path="../../../../lib/jquery.d.ts"/>
 /// <reference path="../../../../lib/box2dweb.d.ts"/>
-/// <reference path="../../../../lib/three.d.ts"/>
 /// <reference path="../../../../lib/lib.ts"/>
 /// <reference path="../../../../imjcart/logic/map/value/MapConst.ts"/>
 /// <reference path="../../../../imjcart/logic/utility/Util.ts"/>
-var __extends = this.__extends || function (d, b) {
+var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var imjcart;
 (function (imjcart) {
+    var display;
     (function (display) {
+        var main;
         (function (main) {
+            var view3d;
             (function (view3d) {
                 var Background = (function (_super) {
                     __extends(Background, _super);
                     function Background(scene) {
-                        _super.call(this);
-                        this._scene = null;
-                        this._field = null;
-                        this._sky = null;
-                        this._scene = scene;
-
+                        var _this = _super.call(this) || this;
+                        _this._scene = null;
+                        _this._field = null;
+                        _this._sky = null;
+                        _this._scene = scene;
                         //
-                        this._createField();
-                        this._createSky();
+                        _this._createField();
+                        _this._createSky();
+                        return _this;
                     }
                     Background.prototype._createField = function () {
                         var geometry = new THREE.CircleGeometry(2500, 30);
@@ -39,7 +40,6 @@ var imjcart;
                         this._field.rotation.x = imjcart.logic.utility.Util.getAngleByRotation(-90);
                         this._scene.add(this._field);
                     };
-
                     Background.prototype._createSky = function () {
                         var geometry = new THREE.CylinderGeometry(2500, 2500, 750, 30, 1, true);
                         var texture = THREE.ImageUtils.loadTexture("img/sky.jpg");
@@ -51,12 +51,10 @@ var imjcart;
                         this._scene.add(this._sky);
                     };
                     return Background;
-                })(lib.event.EventDispacher);
+                }(lib.event.EventDispacher));
                 view3d.Background = Background;
-            })(main.view3d || (main.view3d = {}));
-            var view3d = main.view3d;
-        })(display.main || (display.main = {}));
-        var main = display.main;
-    })(imjcart.display || (imjcart.display = {}));
-    var display = imjcart.display;
+            })(view3d = main.view3d || (main.view3d = {}));
+        })(main = display.main || (display.main = {}));
+    })(display = imjcart.display || (imjcart.display = {}));
 })(imjcart || (imjcart = {}));
+//# sourceMappingURL=Background.js.map

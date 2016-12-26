@@ -3,40 +3,40 @@
 /// <reference path="../../../../imjcart/logic/value/Const.ts"/>
 /// <reference path="../../../../imjcart/logic/value/GlobalValue.ts"/>
 /// <reference path="../../../../imjcart/logic/event/ProjectEvent.ts"/>
-var __extends = this.__extends || function (d, b) {
+var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var imjcart;
 (function (imjcart) {
+    var display;
     (function (display) {
+        var main;
         (function (main) {
+            var ranking;
             (function (ranking) {
                 var Ranking = (function (_super) {
                     __extends(Ranking, _super);
                     function Ranking(target) {
-                        var _this = this;
-                        _super.call(this, target);
-                        this._displayImpl = null;
-                        this._$list = null;
-                        this._$listItem = null;
-
+                        var _this = _super.call(this, target) || this;
+                        _this._displayImpl = null;
+                        _this._$list = null;
+                        _this._$listItem = null;
                         //
-                        this._$list = $("#rankingList");
-                        this._$listItem = this._$list.find("li:first-child").clone();
-                        this._$list.empty();
-
+                        _this._$list = $("#rankingList");
+                        _this._$listItem = _this._$list.find("li:first-child").clone();
+                        _this._$list.empty();
                         //
-                        this._displayImpl = new lib.display.SimpleDisplayImpl(this.$target);
-                        this._displayImpl.addEventListener(lib.event.Event.DISPLAY_START_OPEN_EVENT, function () {
+                        _this._displayImpl = new lib.display.SimpleDisplayImpl(_this.$target);
+                        _this._displayImpl.addEventListener(lib.event.Event.DISPLAY_START_OPEN_EVENT, function () {
                             lib.responisive.ResizeManager.getInstance().addEventListener(_this);
                             lib.responisive.ResizeManager.getInstance().dispatchEvent(_this);
                         });
-                        this._displayImpl.addEventListener(lib.event.Event.DISPLAY_COMPLETE_OPEN_EVENT, function () {
+                        _this._displayImpl.addEventListener(lib.event.Event.DISPLAY_COMPLETE_OPEN_EVENT, function () {
                             _this._completeOpen();
                         });
+                        return _this;
                         //
                         // ---------- イベント ---------- //
                         //
@@ -44,17 +44,14 @@ var imjcart;
                     Ranking.prototype.open = function () {
                         this._displayImpl.open(0);
                     };
-
                     Ranking.prototype.close = function () {
                         this._displayImpl.close(0);
                     };
-
                     Ranking.prototype._completeOpen = function () {
                         // ランキングデータリクエストイベント
                         var values = imjcart.logic.value.GlobalValue.getInstance();
                         values.main.dispatchEvent(imjcart.logic.event.ProjectEvent.GET_RANKING_FROM_CLIENT_EVENT, { skip: 0, limit: 30 });
                     };
-
                     Ranking.prototype.onResize = function (width, height) {
                         var windowHeight = height;
                         if (windowHeight < imjcart.logic.value.Const.STAGE_HEIGHT)
@@ -71,11 +68,9 @@ var imjcart;
                             height: imjcart.logic.value.Const.RANKING_HEIGHT
                         });
                     };
-
                     // ランキングデータ受信
                     Ranking.prototype.receiveRanking = function () {
                         var values = imjcart.logic.value.GlobalValue.getInstance();
-
                         //
                         var targetTop = 0;
                         this._$list.empty();
@@ -107,7 +102,6 @@ var imjcart;
                         }
                         this._$list.scrollTop(targetTop);
                     };
-
                     // ラップタイム保存完了
                     Ranking.prototype.completeSaveLaptime = function () {
                         // ランキングデータリクエストイベント
@@ -115,12 +109,10 @@ var imjcart;
                         values.main.dispatchEvent(imjcart.logic.event.ProjectEvent.GET_RANKING_FROM_CLIENT_EVENT, { skip: 0, limit: 30 });
                     };
                     return Ranking;
-                })(lib.base.BaseDisplay);
+                }(lib.base.BaseDisplay));
                 ranking.Ranking = Ranking;
-            })(main.ranking || (main.ranking = {}));
-            var ranking = main.ranking;
-        })(display.main || (display.main = {}));
-        var main = display.main;
-    })(imjcart.display || (imjcart.display = {}));
-    var display = imjcart.display;
+            })(ranking = main.ranking || (main.ranking = {}));
+        })(main = display.main || (display.main = {}));
+    })(display = imjcart.display || (imjcart.display = {}));
 })(imjcart || (imjcart = {}));
+//# sourceMappingURL=Ranking.js.map

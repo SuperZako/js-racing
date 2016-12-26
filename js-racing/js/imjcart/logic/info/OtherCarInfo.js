@@ -1,23 +1,24 @@
 /// <reference path="../../../lib/jquery.d.ts"/>
 /// <reference path="../../../lib/box2dweb.d.ts"/>
-/// <reference path="../../../lib/three.d.ts"/>
 /// <reference path="../../../lib/lib.ts"/>
 var imjcart;
 (function (imjcart) {
+    var logic;
     (function (logic) {
+        var info;
         (function (info) {
             var OtherCarInfo = (function () {
                 function OtherCarInfo(id, x, y, bodyAngle, wheelAngle, speed, colorBody, colorWing, colorDriver, name) {
-                    if (typeof id === "undefined") { id = null; }
-                    if (typeof x === "undefined") { x = 0; }
-                    if (typeof y === "undefined") { y = 0; }
-                    if (typeof bodyAngle === "undefined") { bodyAngle = 0; }
-                    if (typeof wheelAngle === "undefined") { wheelAngle = 0; }
-                    if (typeof speed === "undefined") { speed = 0; }
-                    if (typeof colorBody === "undefined") { colorBody = null; }
-                    if (typeof colorWing === "undefined") { colorWing = null; }
-                    if (typeof colorDriver === "undefined") { colorDriver = null; }
-                    if (typeof name === "undefined") { name = null; }
+                    if (id === void 0) { id = null; }
+                    if (x === void 0) { x = 0; }
+                    if (y === void 0) { y = 0; }
+                    if (bodyAngle === void 0) { bodyAngle = 0; }
+                    if (wheelAngle === void 0) { wheelAngle = 0; }
+                    if (speed === void 0) { speed = 0; }
+                    if (colorBody === void 0) { colorBody = null; }
+                    if (colorWing === void 0) { colorWing = null; }
+                    if (colorDriver === void 0) { colorDriver = null; }
+                    if (name === void 0) { name = null; }
                     this._id = null;
                     this._name = null;
                     this._x = null;
@@ -39,7 +40,6 @@ var imjcart;
                     this._colorDriver = colorDriver;
                     this._name = name;
                 }
-
                 Object.defineProperty(OtherCarInfo.prototype, "id", {
                     get: function () {
                         return this._id;
@@ -50,8 +50,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(OtherCarInfo.prototype, "name", {
                     get: function () {
                         return this._name;
@@ -62,8 +60,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(OtherCarInfo.prototype, "x", {
                     get: function () {
                         return this._x;
@@ -74,8 +70,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(OtherCarInfo.prototype, "y", {
                     get: function () {
                         return this._y;
@@ -86,8 +80,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(OtherCarInfo.prototype, "bodyAngle", {
                     get: function () {
                         return this._bodyAngle;
@@ -98,8 +90,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(OtherCarInfo.prototype, "wheelAngle", {
                     get: function () {
                         return this._wheelAngle;
@@ -110,8 +100,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(OtherCarInfo.prototype, "speed", {
                     get: function () {
                         return this._speed;
@@ -122,8 +110,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(OtherCarInfo.prototype, "colorBody", {
                     get: function () {
                         return this._colorBody;
@@ -134,8 +120,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(OtherCarInfo.prototype, "colorWing", {
                     get: function () {
                         return this._colorWing;
@@ -146,8 +130,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(OtherCarInfo.prototype, "colorDriver", {
                     get: function () {
                         return this._colorDriver;
@@ -159,10 +141,9 @@ var imjcart;
                     configurable: true
                 });
                 return OtherCarInfo;
-            })();
+            }());
             info.OtherCarInfo = OtherCarInfo;
-        })(logic.info || (logic.info = {}));
-        var info = logic.info;
-    })(imjcart.logic || (imjcart.logic = {}));
-    var logic = imjcart.logic;
+        })(info = logic.info || (logic.info = {}));
+    })(logic = imjcart.logic || (imjcart.logic = {}));
 })(imjcart || (imjcart = {}));
+//# sourceMappingURL=OtherCarInfo.js.map

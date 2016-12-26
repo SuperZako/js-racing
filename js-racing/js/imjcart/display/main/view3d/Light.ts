@@ -25,7 +25,7 @@ module imjcart.display.main.view3d {
                 this._light.shadowCameraRight = 1000;
                 this._light.shadowCameraTop = -1000;
                 this._light.shadowCameraBottom = 1000;
-                this._light.shadowDarkness = 0.7;
+                // this._light.shadowDarkness = 0.7;
                 this._light.shadowMapWidth = 5000;
                 this._light.shadowMapHeight = 5000;
                 this._scene.add(this._light);
@@ -47,7 +47,7 @@ module imjcart.display.main.view3d {
                 this._light.shadowCameraRight = 1000;
                 this._light.shadowCameraTop = -1000;
                 this._light.shadowCameraBottom = 1000;
-                this._light.shadowDarkness = 0.7;
+                // this._light.shadowDarkness = 0.7;
                 this._light.shadowMapWidth = 5000;
                 this._light.shadowMapHeight = 5000;
                 this._scene.add(this._light);

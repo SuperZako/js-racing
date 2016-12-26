@@ -1,6 +1,5 @@
 /// <reference path="../../../lib/jquery.d.ts"/>
 /// <reference path="../../../lib/box2dweb.d.ts"/>
-/// <reference path="../../../lib/three.d.ts"/>
 /// <reference path="../../../lib/lib.ts"/>
 /// <reference path="../../../imjcart/logic/info/CarInfo.ts"/>
 /// <reference path="../../../imjcart/logic/info/LapTimeInfo.ts"/>
@@ -8,8 +7,10 @@
 /// <reference path="../../../imjcart/display/controller/Controller.ts"/>
 var imjcart;
 (function (imjcart) {
+    var logic;
     (function (logic) {
-        (function (_value) {
+        var value;
+        (function (value_1) {
             var GlobalValue = (function () {
                 function GlobalValue() {
                     this._main = null;
@@ -38,8 +39,6 @@ var imjcart;
                     }
                     return GlobalValue._instance;
                 };
-
-
                 Object.defineProperty(GlobalValue.prototype, "main", {
                     get: function () {
                         return this._main;
@@ -50,8 +49,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(GlobalValue.prototype, "controller", {
                     get: function () {
                         return this._controller;
@@ -62,8 +59,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(GlobalValue.prototype, "socketId", {
                     get: function () {
                         return this._socketId;
@@ -74,8 +69,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(GlobalValue.prototype, "currentSceneId", {
                     get: function () {
                         return this._currentSceneId;
@@ -86,8 +79,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(GlobalValue.prototype, "pastSceneId", {
                     get: function () {
                         return this._pastSceneId;
@@ -98,8 +89,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(GlobalValue.prototype, "currentTimeAtackSceneId", {
                     get: function () {
                         return this._currentTimeAtackSceneId;
@@ -110,8 +99,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(GlobalValue.prototype, "pastTimeAtackSceneId", {
                     get: function () {
                         return this._pastTimeAtackSceneId;
@@ -122,8 +109,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(GlobalValue.prototype, "carInfo", {
                     get: function () {
                         return this._carInfo;
@@ -134,8 +119,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(GlobalValue.prototype, "otherCarInfoArr", {
                     get: function () {
                         return this._otherCarInfoArr;
@@ -146,8 +129,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(GlobalValue.prototype, "colorBody", {
                     get: function () {
                         return this._colorBody;
@@ -158,8 +139,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(GlobalValue.prototype, "colorWing", {
                     get: function () {
                         return this._colorWing;
@@ -170,8 +149,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(GlobalValue.prototype, "colorDriver", {
                     get: function () {
                         return this._colorDriver;
@@ -182,8 +159,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(GlobalValue.prototype, "name", {
                     get: function () {
                         return this._name;
@@ -194,8 +169,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(GlobalValue.prototype, "comment", {
                     get: function () {
                         return this._comment;
@@ -206,8 +179,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(GlobalValue.prototype, "fastestLapTime", {
                     get: function () {
                         return this._fastestLapTime;
@@ -218,8 +189,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(GlobalValue.prototype, "lapTimeInfoArr", {
                     get: function () {
                         return this._lapTimeInfoArr;
@@ -230,8 +199,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(GlobalValue.prototype, "lapTimeInfo", {
                     get: function () {
                         return this._lapTimeInfo;
@@ -242,8 +209,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(GlobalValue.prototype, "fastestRunningPathCollection", {
                     get: function () {
                         return this._fastestRunningPathCollection;
@@ -254,12 +219,11 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-                GlobalValue._instance = null;
                 return GlobalValue;
-            })();
-            _value.GlobalValue = GlobalValue;
-        })(logic.value || (logic.value = {}));
-        var value = logic.value;
-    })(imjcart.logic || (imjcart.logic = {}));
-    var logic = imjcart.logic;
+            }());
+            GlobalValue._instance = null;
+            value_1.GlobalValue = GlobalValue;
+        })(value = logic.value || (logic.value = {}));
+    })(logic = imjcart.logic || (imjcart.logic = {}));
 })(imjcart || (imjcart = {}));
+//# sourceMappingURL=GlobalValue.js.map

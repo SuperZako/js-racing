@@ -2,18 +2,20 @@
 /// <reference path="../../../lib/lib.ts"/>
 var imjcart;
 (function (imjcart) {
+    var logic;
     (function (logic) {
+        var info;
         (function (info) {
             var LapTimeInfo = (function () {
                 function LapTimeInfo(id, time, rank, length, name, comment, colorBody, colorWing, colorDriver, runningPath) {
-                    if (typeof rank === "undefined") { rank = null; }
-                    if (typeof length === "undefined") { length = null; }
-                    if (typeof name === "undefined") { name = "No Name"; }
-                    if (typeof comment === "undefined") { comment = null; }
-                    if (typeof colorBody === "undefined") { colorBody = null; }
-                    if (typeof colorWing === "undefined") { colorWing = null; }
-                    if (typeof colorDriver === "undefined") { colorDriver = null; }
-                    if (typeof runningPath === "undefined") { runningPath = []; }
+                    if (rank === void 0) { rank = null; }
+                    if (length === void 0) { length = null; }
+                    if (name === void 0) { name = "No Name"; }
+                    if (comment === void 0) { comment = null; }
+                    if (colorBody === void 0) { colorBody = null; }
+                    if (colorWing === void 0) { colorWing = null; }
+                    if (colorDriver === void 0) { colorDriver = null; }
+                    if (runningPath === void 0) { runningPath = []; }
                     this._id = null;
                     this._time = null;
                     this._rank = null;
@@ -42,7 +44,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
                 Object.defineProperty(LapTimeInfo.prototype, "time", {
                     get: function () {
                         return this._time;
@@ -50,7 +51,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
                 Object.defineProperty(LapTimeInfo.prototype, "rank", {
                     get: function () {
                         return this._rank;
@@ -58,7 +58,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
                 Object.defineProperty(LapTimeInfo.prototype, "length", {
                     get: function () {
                         return this._length;
@@ -66,7 +65,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
                 Object.defineProperty(LapTimeInfo.prototype, "name", {
                     get: function () {
                         return this._name;
@@ -74,7 +72,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
                 Object.defineProperty(LapTimeInfo.prototype, "comment", {
                     get: function () {
                         return this._comment;
@@ -82,7 +79,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
                 Object.defineProperty(LapTimeInfo.prototype, "colorBody", {
                     get: function () {
                         return this._colorBody;
@@ -90,7 +86,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
                 Object.defineProperty(LapTimeInfo.prototype, "colorWing", {
                     get: function () {
                         return this._colorWing;
@@ -98,7 +93,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
                 Object.defineProperty(LapTimeInfo.prototype, "colorDriver", {
                     get: function () {
                         return this._colorDriver;
@@ -106,7 +100,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
                 Object.defineProperty(LapTimeInfo.prototype, "runningPath", {
                     get: function () {
                         return this._runningPath;
@@ -115,10 +108,9 @@ var imjcart;
                     configurable: true
                 });
                 return LapTimeInfo;
-            })();
+            }());
             info.LapTimeInfo = LapTimeInfo;
-        })(logic.info || (logic.info = {}));
-        var info = logic.info;
-    })(imjcart.logic || (imjcart.logic = {}));
-    var logic = imjcart.logic;
+        })(info = logic.info || (logic.info = {}));
+    })(logic = imjcart.logic || (imjcart.logic = {}));
 })(imjcart || (imjcart = {}));
+//# sourceMappingURL=LapTimeInfo.js.map

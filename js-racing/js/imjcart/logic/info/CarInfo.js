@@ -1,26 +1,27 @@
 /// <reference path="../../../lib/jquery.d.ts"/>
 /// <reference path="../../../lib/box2dweb.d.ts"/>
-/// <reference path="../../../lib/three.d.ts"/>
 /// <reference path="../../../lib/lib.ts"/>
 /// <reference path="../../../imjcart/logic/info/RunningPath.ts"/>
 var imjcart;
 (function (imjcart) {
+    var logic;
     (function (logic) {
+        var info;
         (function (info) {
             var CarInfo = (function () {
                 function CarInfo(x, y, bodyAngle, wheelAngle, speed, power, gear, direction, colorBody, colorWing, colorDriver, name) {
-                    if (typeof x === "undefined") { x = 0; }
-                    if (typeof y === "undefined") { y = 0; }
-                    if (typeof bodyAngle === "undefined") { bodyAngle = 0; }
-                    if (typeof wheelAngle === "undefined") { wheelAngle = 0; }
-                    if (typeof speed === "undefined") { speed = 0; }
-                    if (typeof power === "undefined") { power = 0; }
-                    if (typeof gear === "undefined") { gear = 0; }
-                    if (typeof direction === "undefined") { direction = 0; }
-                    if (typeof colorBody === "undefined") { colorBody = null; }
-                    if (typeof colorWing === "undefined") { colorWing = null; }
-                    if (typeof colorDriver === "undefined") { colorDriver = null; }
-                    if (typeof name === "undefined") { name = null; }
+                    if (x === void 0) { x = 0; }
+                    if (y === void 0) { y = 0; }
+                    if (bodyAngle === void 0) { bodyAngle = 0; }
+                    if (wheelAngle === void 0) { wheelAngle = 0; }
+                    if (speed === void 0) { speed = 0; }
+                    if (power === void 0) { power = 0; }
+                    if (gear === void 0) { gear = 0; }
+                    if (direction === void 0) { direction = 0; }
+                    if (colorBody === void 0) { colorBody = null; }
+                    if (colorWing === void 0) { colorWing = null; }
+                    if (colorDriver === void 0) { colorDriver = null; }
+                    if (name === void 0) { name = null; }
                     this._name = null;
                     this._x = null;
                     this._y = null;
@@ -55,8 +56,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(CarInfo.prototype, "name", {
                     get: function () {
                         return this._name;
@@ -67,8 +66,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(CarInfo.prototype, "x", {
                     get: function () {
                         return this._x;
@@ -79,8 +76,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(CarInfo.prototype, "y", {
                     get: function () {
                         return this._y;
@@ -91,8 +86,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(CarInfo.prototype, "bodyAngle", {
                     get: function () {
                         return this._bodyAngle;
@@ -103,8 +96,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(CarInfo.prototype, "wheelAngle", {
                     get: function () {
                         return this._wheelAngle;
@@ -115,8 +106,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(CarInfo.prototype, "speed", {
                     get: function () {
                         return this._speed;
@@ -127,8 +116,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(CarInfo.prototype, "power", {
                     get: function () {
                         return this._power;
@@ -139,8 +126,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(CarInfo.prototype, "gear", {
                     get: function () {
                         return this._gear;
@@ -151,8 +136,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(CarInfo.prototype, "direction", {
                     get: function () {
                         return this._direction;
@@ -163,8 +146,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(CarInfo.prototype, "colorBody", {
                     get: function () {
                         return this._colorBody;
@@ -175,8 +156,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(CarInfo.prototype, "colorWing", {
                     get: function () {
                         return this._colorWing;
@@ -187,8 +166,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
-
                 Object.defineProperty(CarInfo.prototype, "colorDriver", {
                     get: function () {
                         return this._colorDriver;
@@ -200,10 +177,9 @@ var imjcart;
                     configurable: true
                 });
                 return CarInfo;
-            })();
+            }());
             info.CarInfo = CarInfo;
-        })(logic.info || (logic.info = {}));
-        var info = logic.info;
-    })(imjcart.logic || (imjcart.logic = {}));
-    var logic = imjcart.logic;
+        })(info = logic.info || (logic.info = {}));
+    })(logic = imjcart.logic || (imjcart.logic = {}));
 })(imjcart || (imjcart = {}));
+//# sourceMappingURL=CarInfo.js.map

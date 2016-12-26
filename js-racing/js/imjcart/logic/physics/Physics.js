@@ -1,51 +1,47 @@
 /// <reference path="../../../lib/jquery.d.ts"/>
 /// <reference path="../../../lib/box2dweb.d.ts"/>
-/// <reference path="../../../lib/three.d.ts"/>
 /// <reference path="../../../lib/lib.ts"/>
 /// <reference path="../../../imjcart/logic/value/Const.ts"/>
 /// <reference path="../../../imjcart/logic/physics/Car.ts"/>
 /// <reference path="../../../imjcart/logic/physics/Obstacles.ts"/>
 /// <reference path="../../../imjcart/logic/physics/value/PhysicsConst.ts"/>
-var __extends = this.__extends || function (d, b) {
+var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var imjcart;
 (function (imjcart) {
+    var logic;
     (function (logic) {
+        var physics;
         (function (physics) {
             var Physics = (function (_super) {
                 __extends(Physics, _super);
                 function Physics($target) {
-                    _super.call(this);
-                    this._$target = null;
-                    this._context = null;
-                    this._world = null;
-                    this._obstacles = null;
-                    this._car = null;
-                    this._isPause = false;
-                    this._$target = $target;
-
+                    var _this = _super.call(this) || this;
+                    _this._$target = null;
+                    _this._context = null;
+                    _this._world = null;
+                    _this._obstacles = null;
+                    _this._car = null;
+                    _this._isPause = false;
+                    _this._$target = $target;
                     // コンテキスト
-                    this._context = this._$target.get(0).getContext("2d");
-
+                    _this._context = _this._$target.get(0).getContext("2d");
                     // 世界
-                    this._world = new Box2D.Dynamics.b2World(new Box2D.Common.Math.b2Vec2(0, 0), true);
-
+                    _this._world = new Box2D.Dynamics.b2World(new Box2D.Common.Math.b2Vec2(0, 0), true);
                     // 障害物
-                    this._obstacles = new physics.Obstacles(this._context, this._world);
-
+                    _this._obstacles = new physics.Obstacles(_this._context, _this._world);
                     // 車生成
-                    this.createCar();
-
+                    _this.createCar();
                     // デバッグモード
                     if (imjcart.logic.value.Const.IS_PHYSICS_DEBUG_MODE) {
-                        this._$target.css({
+                        _this._$target.css({
                             display: "block"
                         });
                     }
+                    return _this;
                 }
                 // 車生成
                 Physics.prototype.createCar = function () {
@@ -64,7 +60,6 @@ var imjcart;
                         }
                     }
                     this._car = new physics.Car(this._context, this._world, x, y);
-
                     //
                     // ---------- イベント ---------- //
                     //
@@ -82,7 +77,6 @@ var imjcart;
                         });
                     });
                 };
-
                 Physics.prototype.update = function () {
                     if (this._isPause)
                         return;
@@ -93,72 +87,61 @@ var imjcart;
                         this._world.DrawDebugData();
                     }
                 };
-
                 Physics.prototype.startEngine = function (value) {
                     if (this._isPause)
                         return;
                     if (this._car)
                         this._car.startEngine(value);
                 };
-
                 Physics.prototype.stopEngine = function () {
                     if (this._isPause)
                         return;
                     if (this._car)
                         this._car.stopEngine();
                 };
-
                 Physics.prototype.setSteeringAngle = function (value) {
                     if (this._isPause)
                         return;
                     if (this._car)
                         this._car.setSteeringAngle(value);
                 };
-
                 Physics.prototype.clearSteeringAngle = function () {
                     if (this._isPause)
                         return;
                     if (this._car)
                         this._car.clearSteeringAngle();
                 };
-
                 // スピードに制限をかける
                 Physics.prototype.setLimitSpeed = function () {
                     // スピードに制限をかける
                     if (this._car)
                         this._car.setLimitSpeed();
                 };
-
                 // スピードの制限をはずす
                 Physics.prototype.clearLimitSpeed = function () {
                     // スピードの制限をはずす
                     if (this._car)
                         this._car.clearLimitSpeed();
                 };
-
                 // 一時停止
                 Physics.prototype.pause = function () {
                     this._isPause = true;
                 };
-
                 // 再開
                 Physics.prototype.resume = function () {
                     this._isPause = false;
                 };
-
                 // リトライ
                 Physics.prototype.retry = function () {
                     this._car.remove();
                     this._car = null;
-
                     // 車生成
                     this.createCar();
                 };
                 return Physics;
-            })(lib.event.EventDispacher);
+            }(lib.event.EventDispacher));
             physics.Physics = Physics;
-        })(logic.physics || (logic.physics = {}));
-        var physics = logic.physics;
-    })(imjcart.logic || (imjcart.logic = {}));
-    var logic = imjcart.logic;
+        })(physics = logic.physics || (logic.physics = {}));
+    })(logic = imjcart.logic || (imjcart.logic = {}));
 })(imjcart || (imjcart = {}));
+//# sourceMappingURL=Physics.js.map

@@ -1,46 +1,46 @@
 /// <reference path="../../../../../../lib/jquery.d.ts"/>
 /// <reference path="../../../../../../lib/box2dweb.d.ts"/>
-/// <reference path="../../../../../../lib/three.d.ts"/>
 /// <reference path="../../../../../../lib/lib.ts"/>
 /// <reference path="../../../../../../imjcart/logic/value/Const.ts"/>
-var __extends = this.__extends || function (d, b) {
+var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var imjcart;
 (function (imjcart) {
+    var display;
     (function (display) {
+        var main;
         (function (main) {
+            var scene;
             (function (scene) {
+                var timeatack;
                 (function (timeatack) {
+                    var run;
                     (function (run) {
                         var Players = (function (_super) {
                             __extends(Players, _super);
                             //.sceneTimeAtackRunPlayersListColor
                             //.sceneTimeAtackRunPlayersListName
                             function Players(target) {
-                                _super.call(this, target);
-                                this._displayImpl = null;
-                                this._$list = $("#sceneTimeAtackRunPlayersList");
-                                this._$listItem = null;
-
+                                var _this = _super.call(this, target) || this;
+                                _this._displayImpl = null;
+                                _this._$list = $("#sceneTimeAtackRunPlayersList");
+                                _this._$listItem = null;
                                 //
-                                this._$listItem = this._$list.find("li").clone();
-                                this._$list.empty();
-
+                                _this._$listItem = _this._$list.find("li").clone();
+                                _this._$list.empty();
                                 //
-                                this._displayImpl = new lib.display.SimpleDisplayImpl(this.$target);
+                                _this._displayImpl = new lib.display.SimpleDisplayImpl(_this.$target);
+                                return _this;
                             }
                             Players.prototype.open = function () {
                                 this._displayImpl.open(0);
                             };
-
                             Players.prototype.close = function () {
                                 this._displayImpl.close(0);
                             };
-
                             // 他の車追加
                             Players.prototype.addOtherCar = function (id) {
                                 var values = imjcart.logic.value.GlobalValue.getInstance();
@@ -75,7 +75,6 @@ var imjcart;
                                     }
                                 }
                             };
-
                             // 他の車除去
                             Players.prototype.removeOtherCar = function (id) {
                                 this._$list.find("li").each(function () {
@@ -86,16 +85,12 @@ var imjcart;
                                 });
                             };
                             return Players;
-                        })(lib.base.BaseDisplay);
+                        }(lib.base.BaseDisplay));
                         run.Players = Players;
-                    })(timeatack.run || (timeatack.run = {}));
-                    var run = timeatack.run;
-                })(scene.timeatack || (scene.timeatack = {}));
-                var timeatack = scene.timeatack;
-            })(main.scene || (main.scene = {}));
-            var scene = main.scene;
-        })(display.main || (display.main = {}));
-        var main = display.main;
-    })(imjcart.display || (imjcart.display = {}));
-    var display = imjcart.display;
+                    })(run = timeatack.run || (timeatack.run = {}));
+                })(timeatack = scene.timeatack || (scene.timeatack = {}));
+            })(scene = main.scene || (main.scene = {}));
+        })(main = display.main || (display.main = {}));
+    })(display = imjcart.display || (imjcart.display = {}));
 })(imjcart || (imjcart = {}));
+//# sourceMappingURL=Players.js.map

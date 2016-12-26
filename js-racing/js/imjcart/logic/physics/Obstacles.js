@@ -1,13 +1,14 @@
 /// <reference path="../../../lib/jquery.d.ts"/>
 /// <reference path="../../../lib/box2dweb.d.ts"/>
-/// <reference path="../../../lib/three.d.ts"/>
 /// <reference path="../../../lib/lib.ts"/>
 /// <reference path="../../../imjcart/logic/map/value/MapConst.ts"/>
 /// <reference path="../../../imjcart/logic/physics/Box.ts"/>
 /// <reference path="../../../imjcart/logic/physics/Circle.ts"/>
 var imjcart;
 (function (imjcart) {
+    var logic;
     (function (logic) {
+        var physics;
         (function (physics) {
             var Obstacles = (function () {
                 function Obstacles(context, world) {
@@ -16,7 +17,6 @@ var imjcart;
                     this._boxes = [];
                     this._context = context;
                     this._world = world;
-
                     //
                     var debugDraw = new Box2D.Dynamics.b2DebugDraw();
                     debugDraw.SetSprite(this._context);
@@ -25,7 +25,6 @@ var imjcart;
                     debugDraw.SetLineThickness(1.0);
                     debugDraw.SetFlags(Box2D.Dynamics.b2DebugDraw.e_shapeBit | Box2D.Dynamics.b2DebugDraw.e_jointBit);
                     this._world.SetDebugDraw(debugDraw);
-
                     // MAP情報に沿って壁を設定
                     var i = 0, max;
                     for (i = 0, max = imjcart.logic.map.value.MapConst.MAP.length; i < max; i = i + 1) {
@@ -36,7 +35,8 @@ var imjcart;
                                     type: Box2D.Dynamics.b2Body.b2_staticBody,
                                     restitution: 0.5
                                 });
-                            } else if (imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_TIRE) {
+                            }
+                            else if (imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_TIRE) {
                                 var radius = imjcart.logic.map.value.MapConst.MAP_BLOCK_SIZE / 4;
                                 var tagX = 0;
                                 var tagY = 0;
@@ -46,16 +46,17 @@ var imjcart;
                                         type: Box2D.Dynamics.b2Body.b2_staticBody,
                                         restitution: 0.5
                                     });
-
                                     //
                                     if (k % 2 == 0) {
                                         tagX = 0;
                                         tagY += radius * 2;
-                                    } else {
+                                    }
+                                    else {
                                         tagX += radius * 2;
                                     }
                                 }
-                            } else if (imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_TREE) {
+                            }
+                            else if (imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_TREE) {
                                 var radius = imjcart.logic.map.value.MapConst.MAP_BLOCK_SIZE / 10;
                                 new physics.Circle(this._context, this._world, imjcart.logic.map.value.MapConst.MAP_BLOCK_SIZE * j + (imjcart.logic.map.value.MapConst.MAP_BLOCK_SIZE / 2), imjcart.logic.map.value.MapConst.MAP_BLOCK_SIZE * i + (imjcart.logic.map.value.MapConst.MAP_BLOCK_SIZE / 2), radius, {
                                     type: Box2D.Dynamics.b2Body.b2_staticBody,
@@ -68,15 +69,13 @@ var imjcart;
                 Obstacles.prototype.getBoxPosition = function (index) {
                     return this._boxes[index].GetPosition();
                 };
-
                 Obstacles.prototype.getBoxAngle = function (index) {
                     return this._boxes[index].GetAngle();
                 };
                 return Obstacles;
-            })();
+            }());
             physics.Obstacles = Obstacles;
-        })(logic.physics || (logic.physics = {}));
-        var physics = logic.physics;
-    })(imjcart.logic || (imjcart.logic = {}));
-    var logic = imjcart.logic;
+        })(physics = logic.physics || (logic.physics = {}));
+    })(logic = imjcart.logic || (imjcart.logic = {}));
 })(imjcart || (imjcart = {}));
+//# sourceMappingURL=Obstacles.js.map

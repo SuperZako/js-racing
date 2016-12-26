@@ -8,27 +8,27 @@ module imjcart.display.main.view3d {
 
     export class Cource extends lib.event.EventDispacher {
 
-        private _scene:THREE.Scene = null;
-        private _startline:THREE.Mesh = null;
-        private _carLine:THREE.Mesh = null;
-        private _base:THREE.Mesh = null;
-        private _grass:THREE.Mesh = null;
-        private _grassLT:THREE.Mesh = null;
-        private _grassLB:THREE.Mesh = null;
-        private _grassRT:THREE.Mesh = null;
-        private _grassRB:THREE.Mesh = null;
-        private _sand:THREE.Mesh = null;
-        private _tree:THREE.Mesh = null;
-        private _tire:THREE.Mesh = null;
-        private _wall:THREE.Mesh = null;
-        private _block:THREE.Mesh = null;
-        private _map:any = null;
-        private _sandMap:any = null;
-        private _grassMap:any = null;
-        private _roadMap:any = null;
-        private _goal:THREE.Mesh = null;
+        private _scene: THREE.Scene = null;
+        private _startline: THREE.Mesh = null;
+        private _carLine: THREE.Mesh = null;
+        private _base: THREE.Mesh = null;
+        private _grass: THREE.Mesh = null;
+        private _grassLT: THREE.Mesh = null;
+        private _grassLB: THREE.Mesh = null;
+        private _grassRT: THREE.Mesh = null;
+        private _grassRB: THREE.Mesh = null;
+        private _sand: THREE.Mesh = null;
+        private _tree: THREE.Mesh = null;
+        private _tire: THREE.Mesh = null;
+        private _wall: THREE.Mesh = null;
+        private _block: THREE.Mesh = null;
+        private _map: any = null;
+        private _sandMap: any = null;
+        private _grassMap: any = null;
+        private _roadMap: any = null;
+        private _goal: THREE.Mesh = null;
 
-        constructor(scene:THREE.Scene) {
+        constructor(scene: THREE.Scene) {
             super();
             this._scene = scene;
             //
@@ -69,7 +69,7 @@ module imjcart.display.main.view3d {
                         || imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_TREE
                         || imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_BLOCK
                         || imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_WALL
-                        ) {
+                    ) {
                         arr.push(null);
                     } else {
                         arr.push("C");
@@ -118,7 +118,7 @@ module imjcart.display.main.view3d {
                         || imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_TIRE
                         || imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_TREE
                         || imjcart.logic.map.value.MapConst.MAP[i][j] == imjcart.logic.map.value.MapConst.MAP_KEY_SAND
-                        ) {
+                    ) {
                         arr.push("G");
                     } else {
                         arr.push(null);
@@ -225,7 +225,7 @@ module imjcart.display.main.view3d {
                         if (imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_SAND
                             || imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_BLOCK
                             || imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_WALL
-                            ) {
+                        ) {
                             if (this._sandMap[i - 1][j] == "LT" || this._sandMap[i - 1][j] == "RT" || this._sandMap[i - 1][j] == "RB") {
                                 this._sandMap[i - 1][j] = "S";
                             } else if (this._sandMap[i - 1][j] != "S") {
@@ -241,7 +241,7 @@ module imjcart.display.main.view3d {
                         if (imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_SAND
                             || imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_BLOCK
                             || imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j - 1] == imjcart.logic.map.value.MapConst.MAP_KEY_WALL
-                            ) {
+                        ) {
                             if (this._sandMap[i + 1][j] == "LB" || this._sandMap[i][j + 1] == "RT" || this._sandMap[i][j + 1] == "RB") {
                                 this._sandMap[i + 1][j] = "S";
                             } else if (this._sandMap[i + 1][j] != "S") {
@@ -257,7 +257,7 @@ module imjcart.display.main.view3d {
                         if (imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_SAND
                             || imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_BLOCK
                             || imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i - 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_WALL
-                            ) {
+                        ) {
                             if (this._sandMap[i][j + 1] == "LB" || this._sandMap[i][j + 1] == "LB" || this._sandMap[i][j + 1] == "RB") {
                                 this._sandMap[i][j + 1] = "S";
                             } else if (this._sandMap[i][j + 1] != "S") {
@@ -273,7 +273,7 @@ module imjcart.display.main.view3d {
                         if (imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_SAND
                             || imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_BLOCK
                             || imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] && imjcart.logic.map.value.MapConst.MAP[i + 1][j + 1] == imjcart.logic.map.value.MapConst.MAP_KEY_WALL
-                            ) {
+                        ) {
                             if (this._sandMap[i + 1][j] == "LT" || this._sandMap[i + 1][j] == "LB" || this._sandMap[i + 1][j] == "RB") {
                                 this._sandMap[i + 1][j] = "S";
                             } else if (this._sandMap[i + 1][j] != "S") {
@@ -308,7 +308,7 @@ module imjcart.display.main.view3d {
                     bumpScale: 0.1
                 });
             } else {
-                material = new THREE.MeshBasicMaterial({map: texture});
+                material = new THREE.MeshBasicMaterial({ map: texture });
             }
             var i, j, max, max2;
             for (i = 0, max = imjcart.logic.map.value.MapConst.MAP.length; i < max; i = i + 1) {
@@ -332,7 +332,7 @@ module imjcart.display.main.view3d {
             var texture = THREE.ImageUtils.loadTexture("img/base2.png");
             texture.minFilter = THREE.NearestFilter;
             texture.magFilter = THREE.LinearMipMapLinearFilter;
-            var material = new THREE.MeshBasicMaterial({map: texture, transparent: true, blending: THREE.NormalBlending});
+            var material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, blending: THREE.NormalBlending });
             var i, j, max, max2;
             for (i = 0, max = this._roadMap.length; i < max; i = i + 1) {
                 for (j = 0, max2 = this._roadMap[i].length; j < max2; j = j + 1) {
@@ -385,7 +385,7 @@ module imjcart.display.main.view3d {
                     blending: THREE.NormalBlending
                 });
             } else {
-                material = new THREE.MeshBasicMaterial({map: texture, transparent: true, blending: THREE.NormalBlending});
+                material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, blending: THREE.NormalBlending });
             }
             var i, j, max, max2;
             for (i = 0, max = imjcart.logic.map.value.MapConst.MAP.length; i < max; i = i + 1) {
@@ -422,7 +422,7 @@ module imjcart.display.main.view3d {
             var texture = THREE.ImageUtils.loadTexture("img/grass.jpg");
             //texture.minFilter = THREE.NearestFilter;
             //texture.magFilter = THREE.LinearMipMapLinearFilter;
-            var material = new THREE.MeshBasicMaterial({map: texture});
+            var material = new THREE.MeshBasicMaterial({ map: texture });
             var i, j, max, max2;
             for (i = 0, max = this._grassMap.length; i < max; i = i + 1) {
                 for (j = 0, max2 = this._grassMap[i].length; j < max2; j = j + 1) {
@@ -447,7 +447,7 @@ module imjcart.display.main.view3d {
             var texture = THREE.ImageUtils.loadTexture("img/grassLT.png");
             //texture.minFilter = THREE.NearestFilter;
             //texture.magFilter = THREE.LinearMipMapLinearFilter;
-            var material = new THREE.MeshBasicMaterial({map: texture, transparent: true, blending: THREE.NormalBlending});
+            var material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, blending: THREE.NormalBlending });
             var i, j, max, max2;
             for (i = 0, max = this._grassMap.length; i < max; i = i + 1) {
                 for (j = 0, max2 = this._grassMap[i].length; j < max2; j = j + 1) {
@@ -472,7 +472,7 @@ module imjcart.display.main.view3d {
             var texture = THREE.ImageUtils.loadTexture("img/grassLB.png");
             //texture.minFilter = THREE.NearestFilter;
             //texture.magFilter = THREE.LinearMipMapLinearFilter;
-            var material = new THREE.MeshBasicMaterial({map: texture, transparent: true, blending: THREE.NormalBlending});
+            var material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, blending: THREE.NormalBlending });
             var i, j, max, max2;
             for (i = 0, max = this._grassMap.length; i < max; i = i + 1) {
                 for (j = 0, max2 = this._grassMap[i].length; j < max2; j = j + 1) {
@@ -497,7 +497,7 @@ module imjcart.display.main.view3d {
             var texture = THREE.ImageUtils.loadTexture("img/grassRT.png");
             //texture.minFilter = THREE.NearestFilter;
             //texture.magFilter = THREE.LinearMipMapLinearFilter;
-            var material = new THREE.MeshBasicMaterial({map: texture, transparent: true, blending: THREE.NormalBlending});
+            var material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, blending: THREE.NormalBlending });
             var i, j, max, max2;
             for (i = 0, max = this._grassMap.length; i < max; i = i + 1) {
                 for (j = 0, max2 = this._grassMap[i].length; j < max2; j = j + 1) {
@@ -522,7 +522,7 @@ module imjcart.display.main.view3d {
             var texture = THREE.ImageUtils.loadTexture("img/grassRB.png");
             //texture.minFilter = THREE.NearestFilter;
             //texture.magFilter = THREE.LinearMipMapLinearFilter;
-            var material = new THREE.MeshBasicMaterial({map: texture, transparent: true, blending: THREE.NormalBlending});
+            var material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, blending: THREE.NormalBlending });
             var i, j, max, max2;
             for (i = 0, max = this._grassMap.length; i < max; i = i + 1) {
                 for (j = 0, max2 = this._grassMap[i].length; j < max2; j = j + 1) {
@@ -547,7 +547,7 @@ module imjcart.display.main.view3d {
             //texture.minFilter = THREE.NearestFilter;
             //texture.magFilter = THREE.LinearMipMapLinearFilter;
             var geometry = new THREE.Geometry();
-            var material = new THREE.MeshBasicMaterial({map: texture, transparent: true, blending: THREE.NormalBlending});
+            var material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, blending: THREE.NormalBlending });
             var i, j, max, max2;
             for (i = 0, max = imjcart.logic.map.value.MapConst.MAP.length; i < max; i = i + 1) {
                 for (j = 0, max2 = imjcart.logic.map.value.MapConst.MAP[i].length; j < max2; j = j + 1) {
@@ -573,15 +573,16 @@ module imjcart.display.main.view3d {
             var loader = new THREE.OBJMTLLoader();
             loader.load("models/wall01/wall01.obj", "models/wall01/wall01.mtl", (object) => {
                 object.traverse(function (child) {
-                    if (child instanceof THREE.Mesh) {
+                    if (child instanceof THREE.Mesh) {                        
                         //var texture = child.material.map;
                         //child.material = new THREE.MeshPhongMaterial(child.material);
                         child.material = new THREE.MeshLambertMaterial(child.material);
+                        let material = <any>child.material;
                         //child.material.shininess = 3;
                         //child.material.bumpMap = texture;
                         //child.material.bumpScale = 0.05;
                         //child.castShadow = true;
-                        child.material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
+                        material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
                         meshArr.push({
                             mesh: child,
                             material: child.material
@@ -621,11 +622,12 @@ module imjcart.display.main.view3d {
                         //var texture = child.material.map;
                         //child.material = new THREE.MeshPhongMaterial(child.material);
                         child.material = new THREE.MeshLambertMaterial(child.material);
+                        let material = <any>child.material;
                         //child.material.shininess = 3;
                         //child.material.bumpMap = texture;
                         //child.material.bumpScale = 0.05;
                         //child.castShadow = true;
-                        child.material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
+                        material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
                         meshArr.push({
                             mesh: child,
                             material: child.material
@@ -665,11 +667,12 @@ module imjcart.display.main.view3d {
                         //var texture = child.material.map;
                         //child.material = new THREE.MeshPhongMaterial(child.material);
                         child.material = new THREE.MeshLambertMaterial(child.material);
+                        let material = <any>child.material;
                         //child.material.shininess = 3;
                         //child.material.bumpMap = texture;
                         //child.material.bumpScale = 0.05;
                         //child.castShadow = true;
-                        child.material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
+                        material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
                         meshArr.push({
                             mesh: child,
                             material: child.material
@@ -709,11 +712,12 @@ module imjcart.display.main.view3d {
                         //var texture = child.material.map;
                         //child.material = new THREE.MeshPhongMaterial(child.material);
                         child.material = new THREE.MeshLambertMaterial(child.material);
+                        let material = <any>child.material;
                         //child.material.shininess = 3;
                         //child.material.bumpMap = texture;
                         //child.material.bumpScale = 0.05;
                         //child.castShadow = true;
-                        child.material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
+                        material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
                         meshArr.push({
                             mesh: child,
                             material: child.material
@@ -747,30 +751,31 @@ module imjcart.display.main.view3d {
             var loader = new THREE.OBJMTLLoader();
             loader.load("models/goal01/goal01.obj", "models/goal01/goal01.mtl", (object) => {
                 object.traverse(function (child) {
-                    if (child instanceof THREE.Mesh) {
-                        switch(child.material.name) {
+                    if (child instanceof THREE.Mesh) {               
+                        let material = <any>child.material;
+                        switch (child.material.name) {
                             case "PostLeft":
-                                child.material.ambient = new THREE.Color(0x999999);
-                                child.material.color = new THREE.Color(0x999999);
+                                material.ambient = new THREE.Color(0x999999);
+                                material.color = new THREE.Color(0x999999);
                                 break;
                             case "PostRight":
-                                child.material.ambient = new THREE.Color(0x999999);
-                                child.material.color = new THREE.Color(0x999999);
+                                material.ambient = new THREE.Color(0x999999);
+                                material.color = new THREE.Color(0x999999);
                                 break;
                             case "Banner":
-                                child.material.ambient = new THREE.Color(0xffffff);
-                                child.material.color = new THREE.Color(0xffffff);
+                                material.ambient = new THREE.Color(0xffffff);
+                                material.color = new THREE.Color(0xffffff);
                                 break;
                             default:
-                                child.material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
+                                material.ambient = new THREE.Color(imjcart.display.main.view3d.value.View3dConst.AMBIENT_COLOR);
                                 break;
                         }
-                        child.material.side = THREE.DoubleSide;
-                        child.material.specular = 0xffffff;
-                        child.material.shininess = 200;
-                        child.material.metal = true;
+                        material.side = THREE.DoubleSide;
+                        material.specular = 0xffffff;
+                        material.shininess = 200;
+                        material.metal = true;
                         //child.material = new THREE.MeshLambertMaterial(child.material);
-                        child.material = new THREE.MeshPhongMaterial(child.material);
+                        child.material = new THREE.MeshPhongMaterial(material);
                         if (imjcart.logic.value.Const.IS_SHADOW_ENABLED) {
                             child.castShadow = true;
                         }
@@ -814,7 +819,7 @@ module imjcart.display.main.view3d {
                     blending: THREE.NormalBlending
                 });
             } else {
-                material = new THREE.MeshBasicMaterial({map: texture, transparent: true, blending: THREE.NormalBlending});
+                material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, blending: THREE.NormalBlending });
             }
             var i, j, max, max2;
             for (i = 0, max = imjcart.logic.map.value.MapConst.MAP.length; i < max; i = i + 1) {
@@ -825,7 +830,7 @@ module imjcart.display.main.view3d {
                         mesh.position.set(
                             imjcart.logic.map.value.MapConst.MAP_BLOCK_SIZE * j + (imjcart.logic.map.value.MapConst.MAP_BLOCK_SIZE / 2),
                             0.8,
-                            imjcart.logic.map.value.MapConst.MAP_BLOCK_SIZE * i  + (imjcart.logic.map.value.MapConst.MAP_BLOCK_SIZE / 2)
+                            imjcart.logic.map.value.MapConst.MAP_BLOCK_SIZE * i + (imjcart.logic.map.value.MapConst.MAP_BLOCK_SIZE / 2)
                         );
                         THREE.GeometryUtils.merge(geometry, mesh);
                     }
@@ -858,7 +863,7 @@ module imjcart.display.main.view3d {
                     blending: THREE.NormalBlending
                 });
             } else {
-                material = new THREE.MeshBasicMaterial({map: texture, transparent: true, blending: THREE.NormalBlending});
+                material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, blending: THREE.NormalBlending });
             }
             var i, j, max, max2;
             for (i = 0, max = this._sandMap.length; i < max; i = i + 1) {
@@ -907,7 +912,7 @@ module imjcart.display.main.view3d {
                     blending: THREE.NormalBlending
                 });
             } else {
-                material = new THREE.MeshBasicMaterial({map: texture, transparent: true, blending: THREE.NormalBlending});
+                material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, blending: THREE.NormalBlending });
             }
             var i, j, max, max2;
             for (i = 0, max = this._sandMap.length; i < max; i = i + 1) {

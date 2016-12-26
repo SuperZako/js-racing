@@ -15,30 +15,30 @@ module imjcart.display.main.view3d {
 
     export class View3d extends lib.base.BaseDisplay implements lib.display.IDisplay, lib.responisive.IResize {
 
-        private _displayImpl:lib.display.IDisplay = null;
-        private _scene:THREE.Scene = null;
-        private _renderer:THREE.WebGLRenderer = null;
-        private _axis:THREE.AxisHelper = null;
-        private _controls:any = null;
+        private _displayImpl: lib.display.IDisplay = null;
+        private _scene: THREE.Scene = null;
+        private _renderer: THREE.WebGLRenderer = null;
+        private _axis: THREE.AxisHelper = null;
+        private _controls: any = null;
         //
-        private _light:Light = null;
-        private _camera:Camera = null;
-        private _background:Background = null;
-        private _cource:Cource = null;
-        private _car:Car = null;
-        private _icon:Icon = null;
-        private _otherCarArr:OtherCar[] = [];
+        private _light: Light = null;
+        private _camera: Camera = null;
+        private _background: Background = null;
+        private _cource: Cource = null;
+        private _car: Car = null;
+        private _icon: Icon = null;
+        private _otherCarArr: OtherCar[] = [];
         //
-        private _carX:number = null;
-        private _carZ:number = null;
-        private _carBodyAngle:number = null;
-        private _carWheelAngle:number = null;
-        private _carSpeed:number = null;
-        private _cameraAngle:string = value.View3dConst.CAMERA_ANGLE_DEFAULT;
+        private _carX: number = null;
+        private _carZ: number = null;
+        private _carBodyAngle: number = null;
+        private _carWheelAngle: number = null;
+        private _carSpeed: number = null;
+        private _cameraAngle: string = value.View3dConst.CAMERA_ANGLE_DEFAULT;
         //
-        private _ghostCarArr:imjcart.display.main.view3d.GhostCar[] = [];
+        private _ghostCarArr: imjcart.display.main.view3d.GhostCar[] = [];
 
-        constructor(target:JQuery) {
+        constructor(target: JQuery) {
             super(target);
             // シーン
             this._scene = new THREE.Scene();
@@ -48,7 +48,7 @@ module imjcart.display.main.view3d {
             this._scene.add(ambient);
             // レンダラ―
             //this._renderer = new THREE.WebGLRenderer();
-            this._renderer = new THREE.WebGLRenderer({antialias: true});
+            this._renderer = new THREE.WebGLRenderer({ antialias: true });
             this._renderer.setSize(window.innerWidth, window.innerHeight - imjcart.logic.value.Const.FOOTER_HEIGHT - imjcart.logic.value.Const.RANKING_HEIGHT);
             this._renderer.setClearColor(0x2077ab, 1);
             if (imjcart.logic.value.Const.IS_SHADOW_ENABLED) {
@@ -79,9 +79,9 @@ module imjcart.display.main.view3d {
             // デバッグモード
             if (imjcart.logic.value.Const.IS_VIEW3D_DEBUG_MODE) {
                 if (imjcart.logic.value.Const.IS_SHADOW_ENABLED) {
-                    this._light.spotLight.shadowCameraVisible = true;
+                    // this._light.spotLight.shadowCameraVisible = true;
                 } else {
-                    this._light.light.shadowCameraVisible = true;
+                    // this._light.light.shadowCameraVisible = true;
                 }
                 this._axis = new THREE.AxisHelper(1000);
                 this._axis.position.set(0, 0, 0);
@@ -96,7 +96,7 @@ module imjcart.display.main.view3d {
                 // ゴーストカー更新
                 var i = 0, max;
                 for (i = 0, max = this._ghostCarArr.length; i < max; i = i + 1) {
-                    var ghost:imjcart.display.main.view3d.GhostCar = this._ghostCarArr[i];
+                    var ghost: imjcart.display.main.view3d.GhostCar = this._ghostCarArr[i];
                     ghost.update();
                 }
             }, 1000 / imjcart.logic.value.Const.FPS)
@@ -128,7 +128,7 @@ module imjcart.display.main.view3d {
             this._displayImpl.close(0);
         }
 
-        public onResize(width:number, height:number):void {
+        public onResize(width: number, height: number): void {
             if (width < imjcart.logic.value.Const.STAGE_WIDTH) width = imjcart.logic.value.Const.STAGE_WIDTH;
             if (height < imjcart.logic.value.Const.STAGE_HEIGHT) height = imjcart.logic.value.Const.STAGE_HEIGHT;
             this.$target.css({
@@ -139,8 +139,8 @@ module imjcart.display.main.view3d {
         }
 
         // 車の姿勢更新
-        public updateCarPosture():void {
-            var values:imjcart.logic.value.GlobalValue = imjcart.logic.value.GlobalValue.getInstance();
+        public updateCarPosture(): void {
+            var values: imjcart.logic.value.GlobalValue = imjcart.logic.value.GlobalValue.getInstance();
             this._carX = values.carInfo.x * imjcart.logic.map.value.MapConst.MAP_SCALE;
             this._carZ = values.carInfo.y * imjcart.logic.map.value.MapConst.MAP_SCALE;
             this._carBodyAngle = -values.carInfo.bodyAngle + imjcart.logic.utility.Util.getAngleByRotation(180);
@@ -159,17 +159,17 @@ module imjcart.display.main.view3d {
         }
 
         // 他の車追加
-        public addOtherCar(id:string):void {
-            var otherCar:OtherCar = new OtherCar(this._scene, id);
+        public addOtherCar(id: string): void {
+            var otherCar: OtherCar = new OtherCar(this._scene, id);
             this._otherCarArr.push(otherCar);
         }
 
         // 他の車削除
-        public removeOtherCar(id:string):void {
+        public removeOtherCar(id: string): void {
             var arr = [];
             var i = 0, max;
             for (i = 0, max = this._otherCarArr.length; i < max; i = i + 1) {
-                var otherCar:OtherCar = this._otherCarArr[i];
+                var otherCar: OtherCar = this._otherCarArr[i];
                 if (id != otherCar.id) {
                     arr.push(otherCar);
                 } else {
@@ -180,14 +180,14 @@ module imjcart.display.main.view3d {
         }
 
         // 他の車の姿勢更新
-        public updateOtherCarPosture():void {
-            var values:imjcart.logic.value.GlobalValue = imjcart.logic.value.GlobalValue.getInstance();
+        public updateOtherCarPosture(): void {
+            var values: imjcart.logic.value.GlobalValue = imjcart.logic.value.GlobalValue.getInstance();
             var i = 0, max;
             for (i = 0, max = values.otherCarInfoArr.length; i < max; i = i + 1) {
-                var info:imjcart.logic.info.OtherCarInfo = values.otherCarInfoArr[i];
+                var info: imjcart.logic.info.OtherCarInfo = values.otherCarInfoArr[i];
                 var j = 0, max2;
                 for (j = 0, max2 = this._otherCarArr.length; j < max2; j = j + 1) {
-                    var otherCar:OtherCar = this._otherCarArr[j];
+                    var otherCar: OtherCar = this._otherCarArr[j];
                     if (otherCar.id == info.id) {
                         var x = info.x * imjcart.logic.map.value.MapConst.MAP_SCALE;
                         var y = info.y * imjcart.logic.map.value.MapConst.MAP_SCALE;
@@ -202,7 +202,7 @@ module imjcart.display.main.view3d {
         }
 
         // シーン変更
-        public changeScene():void {
+        public changeScene(): void {
             this._changeCameraMode();
             //
             var values = imjcart.logic.value.GlobalValue.getInstance();
@@ -220,13 +220,13 @@ module imjcart.display.main.view3d {
         }
 
         // タイムアタックシーン変更
-        public changeTimeAtackScene():void {
+        public changeTimeAtackScene(): void {
             this._changeCameraMode();
         }
 
-        private _changeCameraMode():void {
-            var values:imjcart.logic.value.GlobalValue = imjcart.logic.value.GlobalValue.getInstance();
-            switch(values.currentSceneId) {
+        private _changeCameraMode(): void {
+            var values: imjcart.logic.value.GlobalValue = imjcart.logic.value.GlobalValue.getInstance();
+            switch (values.currentSceneId) {
                 case imjcart.logic.value.Const.ID_SCENE_OPENING:
                     // カメラモード設定
                     this._camera.mode = value.View3dConst.CAMERA_MODE_OPENING;
@@ -247,7 +247,7 @@ module imjcart.display.main.view3d {
         }
 
         // カメラアングル変更
-        public changeCameraAngle():void {
+        public changeCameraAngle(): void {
             switch (this._cameraAngle) {
                 case value.View3dConst.CAMERA_ANGLE_TOP:
                     this._cameraAngle = value.View3dConst.CAMERA_ANGLE_BACK;
@@ -267,20 +267,20 @@ module imjcart.display.main.view3d {
         }
 
         // ゴーストカー設置
-        public setGhostCars():void {
+        public setGhostCars(): void {
             if (1 <= this._ghostCarArr.length) return;
             var infoArr = [];
             var values = imjcart.logic.value.GlobalValue.getInstance();
             var i = 0, max;
             for (i = 0, max = values.lapTimeInfoArr.length; i < max; i = i + 1) {
-                var info:imjcart.logic.info.LapTimeInfo = values.lapTimeInfoArr[i];
+                var info: imjcart.logic.info.LapTimeInfo = values.lapTimeInfoArr[i];
                 if (info.runningPath && info.runningPath.collection.length) {
                     infoArr.push(info);
                 }
             }
             infoArr = imjcart.logic.utility.Util.shuffle(infoArr);
             for (i = 0, max = imjcart.logic.value.Const.MAX_GHOST_COUNT; i < max; i = i + 1) {
-                var ghostCar:imjcart.display.main.view3d.GhostCar = new imjcart.display.main.view3d.GhostCar(this._scene, infoArr[i], i * (1800 / imjcart.logic.value.Const.MAX_GHOST_COUNT));
+                var ghostCar: imjcart.display.main.view3d.GhostCar = new imjcart.display.main.view3d.GhostCar(this._scene, infoArr[i], i * (1800 / imjcart.logic.value.Const.MAX_GHOST_COUNT));
                 this._ghostCarArr.push(ghostCar);
             }
         }

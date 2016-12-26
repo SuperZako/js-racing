@@ -1,15 +1,16 @@
 /// <reference path="../../../lib/jquery.d.ts"/>
 /// <reference path="../../../lib/box2dweb.d.ts"/>
-/// <reference path="../../../lib/three.d.ts"/>
 /// <reference path="../../../lib/lib.ts"/>
 var imjcart;
 (function (imjcart) {
+    var logic;
     (function (logic) {
+        var info;
         (function (info) {
             var RunningPath = (function () {
                 function RunningPath(index, collection) {
-                    if (typeof index === "undefined") { index = 0; }
-                    if (typeof collection === "undefined") { collection = []; }
+                    if (index === void 0) { index = 0; }
+                    if (collection === void 0) { collection = []; }
                     this._collection = [];
                     this._currentIndex = 0;
                     this._currentIndex = index;
@@ -22,17 +23,16 @@ var imjcart;
                         bodyAngle: Math.round(bodyAngle * 1000) / 1000
                     });
                 };
-
                 RunningPath.prototype.clearPath = function () {
                     this._collection = [];
                 };
-
                 Object.defineProperty(RunningPath.prototype, "currentPath", {
                     get: function () {
                         var path = this._collection[this._currentIndex];
                         if (this._collection.length <= this._currentIndex) {
                             this._currentIndex = 0;
-                        } else {
+                        }
+                        else {
                             this._currentIndex += 1;
                         }
                         return {
@@ -44,7 +44,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
                 Object.defineProperty(RunningPath.prototype, "currentIndex", {
                     set: function (index) {
                         this._currentIndex = index;
@@ -52,7 +51,6 @@ var imjcart;
                     enumerable: true,
                     configurable: true
                 });
-
                 Object.defineProperty(RunningPath.prototype, "collection", {
                     get: function () {
                         return this._collection;
@@ -61,10 +59,9 @@ var imjcart;
                     configurable: true
                 });
                 return RunningPath;
-            })();
+            }());
             info.RunningPath = RunningPath;
-        })(logic.info || (logic.info = {}));
-        var info = logic.info;
-    })(imjcart.logic || (imjcart.logic = {}));
-    var logic = imjcart.logic;
+        })(info = logic.info || (logic.info = {}));
+    })(logic = imjcart.logic || (imjcart.logic = {}));
 })(imjcart || (imjcart = {}));
+//# sourceMappingURL=RunningPath.js.map
